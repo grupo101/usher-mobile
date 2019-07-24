@@ -5,27 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/background">
 
     <ImageView
         android:layout_width="372dp"
-        android:layout_height="219dp"
-        android:layout_gravity="center"/>
-        //android:src="@drawable/pelotita"
+        android:layout_height="306dp"
+        android:layout_gravity="center" />
+    //android:src="@drawable/pelotita"
 
     <EditText
         android:id="@+id/etUserLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:hint="Usuario"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/etPassLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="59dp"
         android:hint="Password"
-        android:inputType="text" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnIniLogin"
@@ -38,8 +39,21 @@
         android:id="@+id/tvRegLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrar"
         android:layout_gravity="center"
-        android:textSize="25sp"/>
-
+        android:text="Registrar"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/tvEsp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textSize="35sp" />
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="USHER"
+        android:textSize="35sp" />
 </LinearLayout>

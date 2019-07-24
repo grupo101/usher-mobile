@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -15,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     et_passwordLogin= findViewById(R.id.etPassLogin);
 
     tv_registerUser.setOnClickListener(new View.OnClickListener(){
-
         @Override
         public void onClick(View view) {
             Intent intentRegUser = new Intent(LoginActivity.this, RegisterUser.class);
@@ -45,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     btn_loginUser.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View view){
-
             final String userName = et_userLogin.getText().toString();
             final String password = et_passwordLogin.getText().toString();
             Response.Listener<String> responseListener = new Response.Listener<String>(){
@@ -55,15 +56,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-                        if(success){
+                        boolean succes = jsonResponse.getBoolean("succes");
+
+                        if(succes){
                             String name= jsonResponse.getString("name");
-                            String surname= jsonResponse.getString("surName");
+                            String surname= jsonResponse.getString("surname");
 
                             Intent intent= new Intent(LoginActivity.this,Dashboard.class);
                             intent.putExtra("name",name);
                             intent.putExtra("surname",surname);
-                            intent.putExtra("userName",userName);
+                            intent.putExtra("username",userName);
                             intent.putExtra("password",password);
 
                             LoginActivity.this.startActivity(intent);
@@ -75,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Toast.makeText( getApplicationContext(), "No te encuentras habilitado por Usher para acceder", Toast.LENGTH_LONG).show();
                     }
 
 
@@ -83,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             };
 
             LoginActivityRequest loginActivityRequest= new LoginActivityRequest(userName,password, responseListener);
-
+            Log.i("LogIn", "LoginActivityRequest ");
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginActivityRequest);
         }
