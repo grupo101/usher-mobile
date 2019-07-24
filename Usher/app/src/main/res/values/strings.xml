@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Usher</string>
+    <string name="app_name">USHER</string>
+    <string name="b_session">Ver Sesion</string>
+    <string name="b_history">Ver Historial de Sesiones</string>
+    <string name="b_logout">Salir</string>
 </resources>

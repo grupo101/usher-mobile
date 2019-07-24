@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etName, etSurName, etUser, etPassword, etBirth, etPhone;
+    EditText etName, etSurName, etUser, etPassword;
     Button registerBtn;
 
     @Override
@@ -46,6 +46,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         final String surName = etSurName.getText().toString();
         final String userName = etUser.getText().toString();
         final String password = etPassword.getText().toString();
+        final String access = "false";
         //final String birth = etBirth.getText().toString();
         //final int phone = Integer.parseInt(etPhone.getText().toString());
 
@@ -56,13 +57,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-                    if (success) {
+                    boolean succes = jsonResponse.getBoolean("succes");
+                    if (succes) {
                         Intent intent = new Intent(RegisterUser.this, LoginActivity.class);
                         RegisterUser.this.startActivity(intent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
-                        builder.setMessage("error en el registro").setNegativeButton("retry", null).create().show();
+                        builder.setMessage("Error en el registro").setNegativeButton("Retry", null).create().show();
                     }
 
                 } catch (JSONException e) {
@@ -72,7 +73,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             }
 
         };
-        RegisterUserRequest registerUserRequest = new RegisterUserRequest(name, surName, userName, password, responseListener);
+        RegisterUserRequest registerUserRequest = new RegisterUserRequest(name, surName, userName, password, access, responseListener);
         RequestQueue queue = Volley.newRequestQueue(RegisterUser.this);
         queue.add(registerUserRequest);
     }
