@@ -1,5 +1,6 @@
 package com.usher.usher.views;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,34 +8,52 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.usher.usher.LoginActivity;
 import com.usher.usher.R;
+import com.usher.usher.RefreshRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SessionView extends View {
 
-    private Paint paintDip1, paintDip2, paintDip3, paintDip4, paintDip5, paintDip6;
-    String linea;
+    /*private Paint paintDip1, paintDip2, paintDip3, paintDip4, paintDip5, paintDip6;
+
     InputStream is;
-    BufferedReader b;
+    BufferedReader b;*/
+    String linea;
+    Paint elemento;
+    List<Paint> camara;
 
     public SessionView(Context context) {
         super(context);
 
-        init(null);
+        init(null, context);
     }
 
     public SessionView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        init(attrs, context);
+
+
     }
 
     public SessionView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
+        init(attrs, context);
     }
 
     /*public SessionView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -42,67 +61,68 @@ public class SessionView extends View {
         init(attrs);
     }*/
 
-    private void init(@Nullable AttributeSet set){
-        paintDip1 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paintDip2 = new Paint();
-        paintDip3 = new Paint();
-        paintDip4 = new Paint();
-        paintDip5 = new Paint();
-        paintDip6 = new Paint();
+    private void init(@Nullable AttributeSet set, final Context context){
+        camara = new ArrayList<>();
+        linea = "000111";
+        int i;
+        for (i = 0; i<linea.length(); i++){
+            elemento = new Paint (Paint.ANTI_ALIAS_FLAG);
+            elemento.setColor(Color.GRAY);
+            camara.add (elemento);
+        }
 
-        paintDip1.setColor(Color.GRAY);
-        paintDip2.setColor(Color.GRAY);
-        paintDip3.setColor(Color.GRAY);
-        paintDip4.setColor(Color.GRAY);
-        paintDip5.setColor(Color.GRAY);
-        paintDip6.setColor(Color.GRAY);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask(){
+            public void run() {
 
-        //b = new BufferedReader(new InputStreamReader(is));
 
+                Response.Listener<String> responseListener = new Response.Listener<String>(){
+
+                    @Override
+                    public void onResponse(String response){
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean succes = jsonResponse.getBoolean("succes");
+
+                            if(succes){
+                                linea = jsonResponse.getString("status");
+                                postInvalidate();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                RefreshRequest refreshRequest= new RefreshRequest(responseListener);
+                RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+                queue.add(refreshRequest);
+
+
+
+
+
+
+            }
+        }, 3 * 1000L, 3 * 1000L);//3 seconds
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
         int ancho = (canvas.getWidth()/2);
-        char pos;
-        //canvas.drawCircle(ancho,100,50, paintDip3);
-        //canvas.drawCircle((ancho - 120),150,50, paintDip1);
-        //canvas.drawCircle((ancho + 120),150,50, paintDip2);
-        is = this.getResources().openRawResource(R.raw.status);
-        b = new BufferedReader(new InputStreamReader(is));
-        try {
-            linea = b.readLine();
-            paintDip1.setColor(linea.charAt(0) == '0' ? Color.GREEN : Color.RED);
-            paintDip2.setColor(linea.charAt(1) == '0' ? Color.GREEN : Color.RED);
-            paintDip3.setColor(linea.charAt(2) == '0' ? Color.GREEN : Color.RED);
-            paintDip4.setColor(linea.charAt(3) == '0' ? Color.GREEN : Color.RED);
-            paintDip5.setColor(linea.charAt(4) == '0' ? Color.GREEN : Color.RED);
-            paintDip6.setColor(linea.charAt(5) == '0' ? Color.GREEN : Color.RED);
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int pos = 0;
+        int presente = 0, ausente = 0;
+        int i;
+        for (i = 0; i<linea.length(); i++){
+            camara.get(i).setColor(linea.charAt(i) == '0' ? Color.GREEN : Color.RED);
+            if (linea.charAt(i) == '0')
+                presente++;
+            else ausente++;
+            pos = pos +120;
+            canvas.drawCircle(pos,100,50, camara.get(i));
         }
-        /*if(is!=null){
-            try {
-                if (((linea=b.readLine())!=null)) {
-                    paintDip1.setColor(linea.charAt(0) == '0' ? Color.GREEN : Color.RED);
-                    paintDip2.setColor(linea.charAt(1) == '0' ? Color.GREEN : Color.RED);
-                    paintDip3.setColor(linea.charAt(2) == '0' ? Color.GREEN : Color.RED);
-                    paintDip4.setColor(linea.charAt(3) == '0' ? Color.GREEN : Color.RED);
-                    paintDip5.setColor(linea.charAt(4) == '0' ? Color.GREEN : Color.RED);
-                    paintDip6.setColor(linea.charAt(5) == '0' ? Color.GREEN : Color.RED);
-        //is.close();
-               }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            canvas.drawCircle(ancho,100,50, paintDip2);
-            canvas.drawCircle((ancho - 120),150,50, paintDip1);
-            canvas.drawCircle((ancho + 120),150,50, paintDip3);
-            canvas.drawCircle(ancho,230,50, paintDip5);
-            canvas.drawCircle((ancho - 120),280,50, paintDip4);
-            canvas.drawCircle((ancho + 120),280,50, paintDip6);
-        //}
+
     }
 }
