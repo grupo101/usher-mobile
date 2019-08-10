@@ -28,7 +28,7 @@ public class Dashboard extends AppCompatActivity {
     TextView tvUser,tvName,tvSurname,tvPassword;
     //ListView list;
     //ArrayList<String> titles = new ArrayList<>();
-    Button btn_sesion;
+    Button btn_sesion, btn_out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class Dashboard extends AppCompatActivity {
 
         tvName = findViewById(R.id.tvNameDs);
         btn_sesion = findViewById(R.id.btn_sess);
+        btn_out = findViewById(R.id.btn_out);
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String surname = intent.getStringExtra("surname");
@@ -55,6 +56,14 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent openSession = new Intent(Dashboard.this, OpenSession.class);
                 Dashboard.this.startActivity(openSession);
+            }
+        });
+
+        btn_out.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
             }
         });
 

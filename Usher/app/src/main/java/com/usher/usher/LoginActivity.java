@@ -73,11 +73,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         }else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("error en el login").setNegativeButton("reintentar", null).create().show();
+                            builder.setMessage("No te encuentras habilitado por Usher para acceder").setNegativeButton("Reintentar más tarde", null).create().show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText( getApplicationContext(), "No te encuentras habilitado por Usher para acceder", Toast.LENGTH_LONG).show();
+                        Toast.makeText( getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
                     }
 
 
