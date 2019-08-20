@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background2">
 
     <ImageView
         android:layout_width="372dp"
@@ -54,6 +54,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="USHER"
-        android:textSize="35sp" />
+        android:text="NEURALFIX"
+        android:textSize="15sp" />
 </LinearLayout>

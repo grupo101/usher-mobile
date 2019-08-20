@@ -8,15 +8,25 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.usher.usher.views.SessionView;
 
+
+
 public class OpenSession extends AppCompatActivity {
 
+    public TextView tvPres;
+    private TextView tvAus;
+    public int tam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_session);
+        final Intent openSession = getIntent();
+
+        tam = openSession.getIntExtra("tamano", -1);
+
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -33,4 +43,6 @@ public class OpenSession extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public int getTam(){ return tam; }
 }

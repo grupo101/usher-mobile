@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class RegisterUserRequest extends StringRequest {
 
-    //private static final String REGISTER_REQUEST_URL="http://10.20.49.210:8080/register.php";
-    private static final String REGISTER_REQUEST_URL="http://192.168.1.101:8080/Register.php";
+    private static final String REGISTER_REQUEST_URL="https://usher.sytes.net/usher-api/register?token=48370255gBrgdlpl050588";
+    //private static final String REGISTER_REQUEST_URL="http://192.168.0.6:8080/Register.php";
     private Map<String,String> params;
 
     public RegisterUserRequest(String name, String surname, String username, String password, String access, Response.Listener<String> listener ){
