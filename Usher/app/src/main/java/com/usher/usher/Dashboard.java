@@ -2,6 +2,7 @@ package com.usher.usher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,12 +11,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import retrofit2.Call;
 
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,9 +32,7 @@ public class Dashboard extends AppCompatActivity {
 
 
     TextView tvUser,tvName,tvSurname,tvPassword;
-    //ListView list;
-    //ArrayList<String> titles = new ArrayList<>();
-    Button btn_sesion, btn_out;
+    Button btn_sesion, btn_out, btn_hist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +42,26 @@ public class Dashboard extends AppCompatActivity {
         tvName = findViewById(R.id.tvNameDs);
         btn_sesion = findViewById(R.id.btn_sess);
         btn_out = findViewById(R.id.btn_out);
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+        btn_hist = findViewById(R.id.btn_historial);
+        final Intent intent = getIntent();
+        final String name = intent.getStringExtra("name");
         String surname = intent.getStringExtra("surname");
         String name_show = name + " " + surname;
         tvName.setText(name_show);
 
-
-        /*inal ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,titles);
-        list = findViewById(R.id.list);
-
-        list.setAdapter(arrayAdapter);
-        getPosts(arrayAdapter);*/
-
         btn_sesion.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
                 Intent openSession = new Intent(Dashboard.this, OpenSession.class);
                 Dashboard.this.startActivity(openSession);
+            }
+        });
+
+        btn_hist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

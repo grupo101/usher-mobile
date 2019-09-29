@@ -63,7 +63,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         RegisterUser.this.startActivity(intent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUser.this);
-                        builder.setMessage("Error en el registro").setNegativeButton("Retry", null).create().show();
+                        builder.setMessage("Error en el registro. Usuario existente").setNegativeButton("Retry", null).create().show();
                     }
 
                 } catch (JSONException e) {
