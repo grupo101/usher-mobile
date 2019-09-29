@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.usher.usher.requests.LoginActivityRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     btn_loginUser= findViewById(R.id.btnIniLogin);
     et_userLogin= findViewById(R.id.etUserLogin);
     et_passwordLogin= findViewById(R.id.etPassLogin);
+
 
     tv_registerUser.setOnClickListener(new View.OnClickListener(){
         @Override
@@ -62,14 +64,15 @@ public class LoginActivity extends AppCompatActivity {
                             String name= jsonResponse.getString("name");
                             String surname= jsonResponse.getString("surname");
 
-                            Intent intent= new Intent(LoginActivity.this,Dashboard.class);
+
+                            Intent intent= new Intent(LoginActivity.this, MainMenu.class);
                             intent.putExtra("name",name);
                             intent.putExtra("surname",surname);
                             intent.putExtra("username",userName);
                             intent.putExtra("password",password);
 
                             LoginActivity.this.startActivity(intent);
-
+                            et_passwordLogin.getText().clear();
 
                         }else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -89,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             Log.i("LogIn", "LoginActivityRequest ");
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginActivityRequest);
+
+
         }
     });
 

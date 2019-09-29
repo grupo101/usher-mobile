@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.usher.usher.OpenSession;
 import com.usher.usher.R;
-import com.usher.usher.RefreshRequest;
+import com.usher.usher.requests.RefreshRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +28,7 @@ public class SessionView extends View {
 
     String linea;
     Paint elemento;
-    Paint numberSeats;
+    Paint numberSeats, paintDefault;
     List<Paint> camara;
     int pos, presente, ausente;
     int taam;
@@ -100,13 +100,11 @@ public class SessionView extends View {
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(refreshRequest);
 
-        //linea = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-
-
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
         numberSeats.setTextSize(40);
-
+        paintDefault = new Paint();
+        paintDefault.setColor(Color.GRAY);
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask(){
@@ -159,10 +157,6 @@ public class SessionView extends View {
                 RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
                 queue.add(refreshRequest);
 
-
-
-
-
             }
         }, 0, 3 * 1000L);//3 seconds
     }
@@ -181,7 +175,7 @@ public class SessionView extends View {
         pos = 0;
         int i;
         for (i = 0; i < taam; i++) {
-            if (show)
+            if (camara.size() > 0)
                 camara.get(i).setColor(linea.charAt(i) == '0' ? Color.GREEN : Color.RED);
 
             if ((pos + ancho / 10) < ancho) {
@@ -190,7 +184,10 @@ public class SessionView extends View {
                 pos = ancho / 11;
                 desply = desply + ancho / 11;
             }
-            canvas.drawCircle(pos, ancho / 11 + desply, ancho / 30, camara.get(i));
+            if (camara.size() > 0)
+                canvas.drawCircle(pos, ancho / 11 + desply, ancho / 30, camara.get(i));
+            else
+                canvas.drawCircle(pos, ancho / 11 + desply, ancho / 30, paintDefault);
             String ubicacion = Integer.toString(i + 1);
             if (i < 9)
                 canvas.drawText(ubicacion, pos - 10, (ancho / 11) + desply + 10, numberSeats);

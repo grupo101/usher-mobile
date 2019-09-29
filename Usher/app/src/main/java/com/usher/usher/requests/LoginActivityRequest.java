@@ -1,4 +1,4 @@
-package com.usher.usher;
+package com.usher.usher.requests;
 
 
 import com.android.volley.Request;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class LoginActivityRequest extends StringRequest {
 
-    //private static final String LOGIN_REQUEST_URL="http://192.168.0.6:8080/Login.php";
+    //private static final String LOGIN_REQUEST_URL="http://192.168.43.229:8080/Login.php";
     private static final String LOGIN_REQUEST_URL="https://usher.sytes.net/usher-api/login?token=48370255gBrgdlpl050588";
     //private static final String LOGIN_REQUEST_URL="https://usher.sytes.net/usher-api/login?token=48370255gBrgdlpl050588";
     private Map<String,String> params;

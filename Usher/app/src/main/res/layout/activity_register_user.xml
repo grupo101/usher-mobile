@@ -5,54 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".RegisterUser"
-    android:background="@drawable/background2">
+    android:padding="30dp"
+    tools:context=".RegisterUser">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="314dp" />
-        //android:src="@drawable/registrocomplejo
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Registrate"
-        android:textSize="25sp" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/i_descLogo"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/etNameRG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:inputType="text"/>
+        android:layout_gravity="center"
+        android:hint="@string/et_name"
+        android:inputType="text"
+        android:importantForAutofill="no" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/etSurNameRG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apellido"
-        android:inputType="text"/>
+        android:layout_gravity="center"
+        android:hint="@string/et_lastName"
+        android:inputType="text"
+        android:importantForAutofill="no" tools:targetApi="o"/>
 
     <EditText
         android:id="@+id/etUserRG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Usuario"
-        android:inputType="text"/>
+        android:layout_gravity="center"
+        android:hint="@string/et_username"
+        android:inputType="text"
+        android:importantForAutofill="no" tools:targetApi="o"/>
 
     <EditText
         android:id="@+id/etPasswordRG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="text"/>
+        android:layout_gravity="center"
+        android:hint="@string/etPassword"
+        android:inputType="textPassword"
+        android:importantForAutofill="no" tools:targetApi="o"/>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="REGISTRAR" />
+        android:text="@string/b_signup"
+        android:background="@drawable/btn_green"/>
 
 </LinearLayout>

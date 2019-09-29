@@ -2,33 +2,12 @@ package com.usher.usher;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-import retrofit2.Call;
-
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-
-import java.util.ArrayList;
-
-public class Dashboard extends AppCompatActivity {
+public class MainMenu extends AppCompatActivity {
 
 
     TextView tvUser,tvName,tvSurname,tvPassword;
@@ -37,7 +16,7 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_main_menu);
 
         tvName = findViewById(R.id.tvNameDs);
         btn_sesion = findViewById(R.id.btn_sess);
@@ -46,22 +25,24 @@ public class Dashboard extends AppCompatActivity {
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         String surname = intent.getStringExtra("surname");
-        String name_show = name + " " + surname;
+        String name_show = "Bienvenido: " + name + " " + surname;
         tvName.setText(name_show);
 
         btn_sesion.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent openSession = new Intent(Dashboard.this, OpenSession.class);
-                Dashboard.this.startActivity(openSession);
+                Intent openSession = new Intent(MainMenu.this, OpenSession.class);
+                MainMenu.this.startActivity(openSession);
             }
         });
 
         btn_hist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainMenu.this, SessionStatistics.class);
+                intent.putExtra("method", "bars");
+                startActivity(intent);
             }
         });
 

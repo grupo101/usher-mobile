@@ -5,55 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
-    android:background="@drawable/background2">
+    android:padding="30dp"
+    tools:context=".LoginActivity">
 
     <ImageView
-        android:layout_width="372dp"
-        android:layout_height="306dp"
-        android:layout_gravity="center" />
-    //android:src="@drawable/pelotita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="@string/i_descLogo"
+        app:srcCompat="@drawable/logo" />
 
     <EditText
         android:id="@+id/etUserLogin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="Usuario"
-        android:inputType="text" />
+        android:hint="@string/et_username"
+        android:inputType="text"
+        android:autofillHints="" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/etPassLogin"
         android:layout_width="match_parent"
         android:layout_height="59dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="@string/etPassword"
+        android:inputType="textPassword"
+        android:autofillHints="" tools:targetApi="o"/>
 
     <Button
         android:id="@+id/btnIniLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:layout_gravity="center"
-        android:text="Iniciar" />
-
-    <TextView
-        android:id="@+id/tvRegLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Registrar"
-        android:textSize="25sp" />
+        android:background="@drawable/btn_green"
+        android:text="@string/b_login"
+        android:textColor="#ffffff"
+        android:textSize="20sp"/>
     <TextView
         android:id="@+id/tvEsp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text=""
-        android:textSize="35sp" />
+        android:layout_marginTop="40dp"
+        android:text="@string/tv_signuptxt"
+        android:textSize="15sp" />
+    <TextView
+        android:id="@+id/tvRegLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/b_signup"
+        android:textStyle="bold"
+        android:textColor="#3bc33b"
+        android:textSize="15sp" />
     <TextView
         android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="NEURALFIX"
+        android:layout_marginTop="25dp"
+        android:text="@string/tv_powNeu"
         android:textSize="15sp" />
 </LinearLayout>

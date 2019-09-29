@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.usher.usher.requests.RegisterUserRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         final String surName = etSurName.getText().toString();
         final String userName = etUser.getText().toString();
         final String password = etPassword.getText().toString();
-        final String access = "false";
+        final String access = "0";
         //final String birth = etBirth.getText().toString();
         //final int phone = Integer.parseInt(etPhone.getText().toString());
 
