@@ -12,15 +12,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".SessionStatistics" />
-        <activity android:name=".views.LoginActivity" />
-        <activity android:name=".OpenSession" />
-        <activity android:name=".Splash_screen">
+        <activity
+            android:name=".views.LoginActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OpenSession" />
+        <activity android:name=".Splash_screen" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".views.MainMenuActivity" />
     </application>

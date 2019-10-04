@@ -21,14 +21,15 @@ import com.usher.usher.presenters.LoginActivityPresenterImpl;
 public class LoginActivity extends AppCompatActivity implements LoginActivityView {
 
 
-    TextView tv_registerUser;
-    EditText et_userLogin, et_passwordLogin;
-    Button btn_loginUser;
+    private TextView tv_registerUser;
+    private EditText et_userLogin, et_passwordLogin;
+    private Button btn_loginUser;
     private ProgressBar pr_progresBarLogin;
     private LoginActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
