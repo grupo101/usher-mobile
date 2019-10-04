@@ -11,10 +11,8 @@ import android.widget.Toast;
 
 import com.usher.usher.OpenSession;
 import com.usher.usher.R;
-import com.usher.usher.SessionStatistics;
 import com.usher.usher.interfaces.MainMenuActivityPresenter;
 import com.usher.usher.interfaces.MainMenuActivityView;
-import com.usher.usher.presenters.LoginActivityPresenterImpl;
 import com.usher.usher.presenters.MainMenuActivityPresenterImpl;
 
 public class MainMenuActivity extends AppCompatActivity implements MainMenuActivityView {
@@ -34,7 +32,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         btn_sesion = findViewById(R.id.btn_sess);
         btn_out = findViewById(R.id.btn_out);
         btn_hist = findViewById(R.id.btn_historial);
-        pr_progressMainMenu = findViewById(R.id.progressLogin);
+        pr_progressMainMenu = findViewById(R.id.progressMainMenu);
 
         //Pasamos metodos del View al Presenter
         presenter = new MainMenuActivityPresenterImpl(this);

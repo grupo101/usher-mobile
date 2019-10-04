@@ -1,15 +1,22 @@
-package com.usher.usher;
+package com.usher.usher.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-public class SessionStatistics extends AppCompatActivity {
+import com.usher.usher.ChartFragment;
+import com.usher.usher.R;
+import com.usher.usher.interfaces.SessionStatisticsView;
+
+public class SessionStatistics extends AppCompatActivity implements SessionStatisticsView {
 
     private Spinner spinner;
     private Button btn_update;
+    private ProgressBar pr_progressSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,7 @@ public class SessionStatistics extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
         btn_update = findViewById(R.id.btn_update);
+        pr_progressSession = findViewById(R.id.progressSession);
 
         String method  = getIntent().getStringExtra("method");
         ChartFragment chartFragment = new ChartFragment();
@@ -27,8 +35,8 @@ public class SessionStatistics extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,chartFragment).commit();
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -39,5 +47,10 @@ public class SessionStatistics extends AppCompatActivity {
             this.finish();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showProgress(boolean option) {
+        pr_progressSession.setVisibility(option ? View.VISIBLE : View.GONE);
     }
 }

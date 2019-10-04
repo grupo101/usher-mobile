@@ -7,7 +7,7 @@
     android:orientation="vertical">
     tools:context=".OpenSession">
 
-    <com.usher.usher.views.SessionView
+    <com.usher.usher.presenters.SessionView
         android:layout_width="match_parent"
         android:layout_height="450dp" />
 
@@ -19,6 +19,14 @@
         android:text="@string/b_quorum"
         android:textColor="#000000"
         android:textSize="30sp" />
+
+    <ProgressBar
+        android:id="@+id/progressSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleHorizontal" />
 
     <TextView
         android:layout_width="wrap_content"
