@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterUser" />
-        <activity android:name=".MainMenu" />
+        <activity android:name=".views.MainMenuActivity" />
     </application>
 
 </manifest>

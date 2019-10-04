@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,19 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-import com.usher.usher.MainMenu;
 import com.usher.usher.R;
 import com.usher.usher.RegisterUser;
 import com.usher.usher.interfaces.LoginActivityPresenter;
 import com.usher.usher.interfaces.LoginActivityView;
 import com.usher.usher.presenters.LoginActivityPresenterImpl;
-import com.usher.usher.requests.LoginActivityRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityView {
@@ -74,14 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
     }
 
     @Override
-    public void showResult(String result) {
-        // Deberia ejecutar el LoginOK
-        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onLoginSuccessfullView(String name, String surname, String username, String password) {
-        Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+        Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
         intent.putExtra("name", name);
         intent.putExtra("surname", surname);
         intent.putExtra("username", username);
