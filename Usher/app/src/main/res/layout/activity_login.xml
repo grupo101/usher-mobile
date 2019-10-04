@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
-    tools:context=".LoginActivity">
+    tools:context=".views.LoginActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -42,6 +42,14 @@
         android:text="@string/b_login"
         android:textColor="#ffffff"
         android:textSize="20sp"/>
+
+    <ProgressBar
+        android:id="@+id/progressLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/tvEsp"
         android:layout_width="wrap_content"
