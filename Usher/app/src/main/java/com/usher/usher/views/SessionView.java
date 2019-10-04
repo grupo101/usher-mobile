@@ -1,4 +1,4 @@
-package com.usher.usher.presenters;
+package com.usher.usher.views;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -15,5 +15,4 @@ public interface LoginActivityPresenter {
 
     void showErrorPresenter(JSONException error);
 
-    void volleyNoEntiendo(LoginActivity loginActivity);
 }

@@ -7,7 +7,7 @@
     android:orientation="vertical">
     tools:context=".OpenSession">
 
-    <com.usher.usher.presenters.SessionView
+    <com.usher.usher.views.SessionView
         android:layout_width="match_parent"
         android:layout_height="450dp" />
 

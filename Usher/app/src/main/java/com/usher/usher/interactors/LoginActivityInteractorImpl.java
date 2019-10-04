@@ -24,7 +24,7 @@ public class LoginActivityInteractorImpl implements LoginActivityInteractor {
 
 
     @Override
-    public void doLoginValidations(final String username, final String password) {
+    public void doLoginValidations(final String username, final String password, LoginActivity loginActivity) {
         responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -40,13 +40,7 @@ public class LoginActivityInteractorImpl implements LoginActivityInteractor {
                 }
             }
         };
-
-    }
-
-    @Override
-    public void volleyNoEntiendoInteractor(String username, String password, LoginActivity loginActivity) {
         LoginActivityRequest loginActivityRequest = new LoginActivityRequest(username, password, responseListener);
-        Log.i("LogIn", "LoginActivityRequest ");
         RequestQueue queue = Volley.newRequestQueue(loginActivity);
         queue.add(loginActivityRequest);
     }

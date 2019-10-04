@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.usher.usher.R;
-import com.usher.usher.RegisterUser;
 import com.usher.usher.interfaces.LoginActivityPresenter;
 import com.usher.usher.interfaces.LoginActivityView;
 import com.usher.usher.presenters.LoginActivityPresenterImpl;
@@ -45,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
         tv_registerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegUser = new Intent(LoginActivity.this, RegisterUser.class);
+                Intent intentRegUser = new Intent(LoginActivity.this, RegisterUserActivity.class);
                 LoginActivity.this.startActivity(intentRegUser);
             }
         });
@@ -54,7 +53,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
             @Override
             public void onClick(View view) {
                 presenter.doLogin(et_userLogin.getText().toString(), et_passwordLogin.getText().toString());
-                presenter.volleyNoEntiendo(LoginActivity.this);
             }
         });
     }

@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".OpenSession" />
         <activity android:name=".Splash_screen" />
-        <activity android:name=".RegisterUser" />
+        <activity android:name=".views.RegisterUserActivity" />
         <activity android:name=".views.MainMenuActivity" />
     </application>
 

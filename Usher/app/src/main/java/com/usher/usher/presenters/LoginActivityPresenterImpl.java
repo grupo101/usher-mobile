@@ -32,17 +32,16 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
         if ( !username.isEmpty() && !password.isEmpty() ) {
             this.username = username;
             this.password = password;
-            interactor.doLoginValidations(this.username, this.password);
+            interactor.doLoginValidations(this.username, this.password, (LoginActivity) view);
         }
-        else if ( !username.isEmpty() ){
-            view.showProgress(false);
-            view.onPasswordClean();
-        }
-        else if ( !password.isEmpty() ){
+        else if ( username.isEmpty() ){
             view.showProgress(false);
             view.onUsernameClean();
         }
-        else{
+        else if ( password.isEmpty() ){
+            view.showProgress(false);
+            view.onPasswordClean();
+        }else{
             view.showProgress(false);
             view.onFailedDataCharge();
         }
@@ -73,10 +72,5 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
             error.printStackTrace();
             view.showError();
         }
-    }
-
-    @Override
-    public void volleyNoEntiendo(LoginActivity loginActivity) {
-        interactor.volleyNoEntiendoInteractor(username, password, loginActivity);
     }
 }
