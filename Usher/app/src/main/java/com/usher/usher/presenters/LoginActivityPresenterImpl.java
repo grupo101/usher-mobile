@@ -42,6 +42,10 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
             view.showProgress(false);
             view.onUsernameClean();
         }
+        else{
+            view.showProgress(false);
+            view.onFailedDataCharge();
+        }
     }
 
     @Override

@@ -15,4 +15,7 @@ public interface LoginActivityView {
     void onPasswordClean();
 
     void onUsernameClean();
+
+    void onFailedDataCharge();
+
 }

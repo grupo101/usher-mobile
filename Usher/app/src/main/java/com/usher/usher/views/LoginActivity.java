@@ -110,4 +110,9 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
     public void onUsernameClean() {
         Toast.makeText( getApplicationContext(), "El usuario no fue ingresado", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onFailedDataCharge() {
+        Toast.makeText( getApplicationContext(), "No ingreso ningun dato", Toast.LENGTH_LONG).show();
+    }
 }

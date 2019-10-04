@@ -7,8 +7,8 @@
     <string name="b_logout">Salir</string>
     <string name="et_name">Nombre</string>
     <string name="et_lastName">Apellido</string>
-    <string name="et_username">Username</string>
-    <string name="etPassword">Password</string>
+    <string name="et_username">Usuario</string>
+    <string name="etPassword">Contraseña</string>
     <string name="tv_powNeu">Powered by NeuralFix</string>
     <string name="b_login">ACCEDER</string>
     <string name="b_signup">REGISTRARSE AHORA</string>
@@ -23,5 +23,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="inicio_de_sesion">INICIO DE SESIÓN</string>
+    <string name="registrar_usuario">REGISTRAR USUARIO</string>
 
 </resources>
