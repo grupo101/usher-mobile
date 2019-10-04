@@ -30,7 +30,9 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
     public void doLogin(String username, String password) {
         view.showProgress(true);
         if ( !username.isEmpty() && !password.isEmpty() ) {
-            interactor.doLoginValidations(username, password);
+            this.username = username;
+            this.password = password;
+            interactor.doLoginValidations(this.username, this.password);
         }
         else if ( !username.isEmpty() ){
             view.showProgress(false);
@@ -47,8 +49,6 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
         if (view != null) {
             name = response.getString("name");
             surname = response.getString("surname");
-            username = response.getString("username");
-            password = response.getString("password");
             view.showProgress(false);
             view.onLoginSuccessfullView(name, surname, username, password);
         }
