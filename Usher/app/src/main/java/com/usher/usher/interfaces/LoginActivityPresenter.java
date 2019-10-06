@@ -11,7 +11,7 @@ public interface LoginActivityPresenter {
 
     void onLoginSuccessfull(JSONObject response) throws JSONException;
 
-    void onLoginFailed(JSONObject response);
+    void onLoginFailed(JSONObject response) throws JSONException;
 
     void showErrorPresenter(JSONException error);
 

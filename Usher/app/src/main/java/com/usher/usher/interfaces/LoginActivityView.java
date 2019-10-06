@@ -6,7 +6,7 @@ public interface LoginActivityView {
 
     void onLoginSuccessfullView(String name, String surname, String username, String password);
 
-    void showLoginFailed();
+    void showLoginFailed(boolean exists);
 
     void showError();
 

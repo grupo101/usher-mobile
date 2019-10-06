@@ -75,9 +75,12 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
     }
 
     @Override
-    public void showLoginFailed() {
+    public void showLoginFailed(boolean exists) {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setMessage("No te encuentras habilitado por Usher para acceder").setNegativeButton("Reintentar más tarde", null).create().show();
+        if (exists)
+            builder.setMessage("No te encuentras habilitado por Usher para acceder").setNegativeButton("Reintentar más tarde", null).create().show();
+        else
+            Toast.makeText( getApplicationContext(), "Usuario o Contraseña incorrecta", Toast.LENGTH_LONG).show();
     }
 
     @Override

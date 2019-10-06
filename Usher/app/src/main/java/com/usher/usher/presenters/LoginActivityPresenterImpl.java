@@ -17,6 +17,7 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
     private String surname;
     private String username;
     private String password;
+    private boolean exists;
 
     public LoginActivityPresenterImpl(LoginActivityView view) {
         //Por aca recibe lo de la vista con sus parametros como constructor
@@ -58,10 +59,11 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
     }
 
     @Override
-    public void onLoginFailed(JSONObject response) {
+    public void onLoginFailed(JSONObject response) throws JSONException {
         if (view != null) {
             view.showProgress(false);
-            view.showLoginFailed();
+            exists = response.getBoolean("exists");
+            view.showLoginFailed(exists);
         }
     }
 

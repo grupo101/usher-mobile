@@ -102,7 +102,7 @@ public class SessionView extends View {
 
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
-        numberSeats.setTextSize(40);
+        numberSeats.setTextSize(20);
         paintDefault = new Paint();
         paintDefault.setColor(Color.GRAY);
 
@@ -168,10 +168,10 @@ public class SessionView extends View {
         int ancho = getWidth();
         int alto = getHeight();
         int desply = 0;
-        canvas.drawLine(50, 50, ancho - 50, 50, numberSeats);
-        canvas.drawLine(ancho - 50, 50, ancho - 50, alto - 50, numberSeats);
-        canvas.drawLine(ancho - 50, alto - 50, 50, alto - 50, numberSeats);
-        canvas.drawLine(50, alto - 50, 50, 50, numberSeats);
+        canvas.drawLine(25, 25, ancho - 25, 25, numberSeats);
+        canvas.drawLine(ancho - 25, 25, ancho - 25, alto - 25, numberSeats);
+        canvas.drawLine(ancho - 25, alto - 25, 25, alto - 25, numberSeats);
+        canvas.drawLine(25, alto - 25, 25, 25, numberSeats);
         pos = 0;
         int i;
         for (i = 0; i < taam; i++) {
@@ -190,11 +190,11 @@ public class SessionView extends View {
                 canvas.drawCircle(pos, ancho / 11 + desply, ancho / 30, paintDefault);
             String ubicacion = Integer.toString(i + 1);
             if (i < 9)
-                canvas.drawText(ubicacion, pos - 10, (ancho / 11) + desply + 10, numberSeats);
+                canvas.drawText(ubicacion, pos - 5, (ancho / 11) + desply + 10, numberSeats);
             else if (i < 99)
-                canvas.drawText(ubicacion, pos - 20, (ancho / 11) + desply + 10, numberSeats);
+                canvas.drawText(ubicacion, pos - 13, (ancho / 11) + desply + 10, numberSeats);
             else
-                canvas.drawText(ubicacion, pos - 30, (ancho / 11) + desply + 10, numberSeats);
+                canvas.drawText(ubicacion, pos - 23, (ancho / 11) + desply + 10, numberSeats);
         }
     }
 }
