@@ -8,4 +8,10 @@ public interface MainMenuActivityView {
 
     void offSesion(boolean status);
 
+    void accessSuccessfullView();
+
+    void accessFailedView();
+
+    void showError();
+
 }

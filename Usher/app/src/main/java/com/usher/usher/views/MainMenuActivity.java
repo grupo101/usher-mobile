@@ -2,6 +2,7 @@ package com.usher.usher.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -54,9 +55,8 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         btn_hist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainMenuActivity.this, SessionStatistics.class);
-                intent.putExtra("method", "bars");
-                startActivity(intent);
+                //if(presenter.checkAccess(intent.getStringExtra("username")));
+                presenter.checkAccess(intent.getStringExtra("username"));
             }
         });
 
@@ -85,6 +85,22 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         Toast.makeText( getApplicationContext(), "Sesión innactiva. Intente en otro momento", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void accessSuccessfullView() {
+        Intent intent = new Intent(MainMenuActivity.this, SessionStatistics.class);
+        intent.putExtra("method", "bars");
+        startActivity(intent);
+    }
+
+    @Override
+    public void accessFailedView() {
+        Toast.makeText( getApplicationContext(), "No tiene permiso para acceder", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText( getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
+    }
 
     /*private void getPosts(final ArrayAdapter arrayAdapter) {
 

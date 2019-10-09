@@ -4,6 +4,10 @@ import com.usher.usher.interactors.MainMenuActivityInteractorImpl;
 import com.usher.usher.interfaces.MainMenuActivityInteractor;
 import com.usher.usher.interfaces.MainMenuActivityPresenter;
 import com.usher.usher.interfaces.MainMenuActivityView;
+import com.usher.usher.views.MainMenuActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter {
 
@@ -24,6 +28,13 @@ public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter 
     }
 
     @Override
+    public void checkAccess(String username){
+        interactor.doAccessValidation(username, (MainMenuActivity) view);
+
+
+    }
+
+    @Override
     public void onSesion(boolean status) {
         if (view != null) {
             view.showProgress(false);
@@ -38,4 +49,29 @@ public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter 
             view.offSesion(status);
         }
     }
+
+    @Override
+    public void accessSuccessfull() {
+        if (view != null) {
+            view.showProgress(false);
+            view.accessSuccessfullView();
+        }
+    }
+
+    @Override
+    public void accessFailed() {
+        if (view != null) {
+            view.accessFailedView();
+        }
+    }
+
+    @Override
+    public void showErrorPresenter(JSONException error) {
+        if (view != null) {
+            view.showProgress(false);
+            error.printStackTrace();
+            view.showError();
+        }
+    }
+
 }
