@@ -30,10 +30,10 @@ public class SessionStatisticsInteractorImpl implements SessionStatisticsInterac
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
-                    //JSONArray jsonArray = new JSONArray(response);
+                    int i = 0;
                     boolean succes = jsonResponse.getBoolean("succes");
                     if (succes)
-                            presenter.listSessions(jsonResponse);
+                        presenter.listSessions(jsonResponse);
                     //else
                         //presenter.accessFailed();
                 } catch (JSONException e) {

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -14,6 +15,8 @@ import com.usher.usher.R;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
 import com.usher.usher.presenters.SessionStatisticsPresenterImpl;
+
+import java.util.ArrayList;
 
 public class SessionStatistics extends AppCompatActivity implements SessionStatisticsView {
 
@@ -63,5 +66,16 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
     @Override
     public void showProgress(boolean option) {
         pr_progressSession.setVisibility(option ? View.VISIBLE : View.GONE);
+    }
+
+
+    @Override
+    public void loadList (ArrayList arrayList){
+        ArrayAdapter<String> list_adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arrayList);
+        list_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(list_adapter);
+        spinner.setSelection(0);
+        //spinner.setOnItemSelectedListener(new );
     }
 }

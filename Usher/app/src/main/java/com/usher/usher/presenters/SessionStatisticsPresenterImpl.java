@@ -7,7 +7,11 @@ import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
 import com.usher.usher.views.SessionStatistics;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class SessionStatisticsPresenterImpl implements SessionStatisticsPresenter {
 
@@ -27,7 +31,16 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
     }
 
     @Override
-    public void listSessions (JSONObject jsonResponse){
-
+    public void listSessions (JSONObject jsonResponse) throws JSONException {
+        int z = jsonResponse.length();
+        ArrayList<String> arrayList = new ArrayList<String>();
+        String coment = new String();
+        for (int i = 1; i < z; i++) {
+            if (i > 0)
+                coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");
+                arrayList.add(coment);
+                view.loadList(arrayList);
+        }
     }
+
 }
