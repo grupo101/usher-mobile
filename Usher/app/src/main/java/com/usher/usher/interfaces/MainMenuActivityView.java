@@ -14,4 +14,5 @@ public interface MainMenuActivityView {
 
     void showError();
 
+    void showName(String name_show);
 }

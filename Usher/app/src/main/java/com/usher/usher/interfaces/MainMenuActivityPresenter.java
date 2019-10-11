@@ -18,4 +18,6 @@ public interface MainMenuActivityPresenter {
     void accessFailed() ;
 
     void showErrorPresenter(JSONException error);
+
+    void setName(String name, String surname);
 }

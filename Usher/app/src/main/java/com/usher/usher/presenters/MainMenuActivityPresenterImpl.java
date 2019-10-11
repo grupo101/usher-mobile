@@ -30,8 +30,6 @@ public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter 
     @Override
     public void checkAccess(String username){
         interactor.doAccessValidation(username, (MainMenuActivity) view);
-
-
     }
 
     @Override
@@ -71,6 +69,14 @@ public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter 
             view.showProgress(false);
             error.printStackTrace();
             view.showError();
+        }
+    }
+
+    @Override
+    public void setName (String name, String surname) {
+        if (view != null) {
+            String name_show = "Bienvenido: " + name + " " + surname;
+            view.showName(name_show);
         }
     }
 

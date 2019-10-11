@@ -23,6 +23,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     private Button btn_sesion, btn_out, btn_hist;
     private ProgressBar pr_progressMainMenu;
     private MainMenuActivityPresenter presenter;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +35,17 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         btn_out = findViewById(R.id.btn_out);
         btn_hist = findViewById(R.id.btn_historial);
         pr_progressMainMenu = findViewById(R.id.progressMainMenu);
-
+        final Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         //Pasamos metodos del View al Presenter
         presenter = new MainMenuActivityPresenterImpl(this);
 
-        final Intent intent = getIntent();
-        final String name = intent.getStringExtra("name");
-        String surname = intent.getStringExtra("surname");
+        presenter.setName(intent.getStringExtra("name"), intent.getStringExtra("surname"));
+
+        /*final String name = intent.getStringExtra("name");
+        String
         String name_show = "Bienvenido: " + name + " " + surname;
-        tvName.setText(name_show);
+        tvName.setText(name_show);*/
 
         btn_sesion.setOnClickListener(new View.OnClickListener() {
 
@@ -55,7 +58,6 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         btn_hist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(presenter.checkAccess(intent.getStringExtra("username")));
                 presenter.checkAccess(intent.getStringExtra("username"));
             }
         });
@@ -87,9 +89,10 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
     @Override
     public void accessSuccessfullView() {
-        Intent intent = new Intent(MainMenuActivity.this, SessionStatistics.class);
-        intent.putExtra("method", "bars");
-        startActivity(intent);
+        Intent sessionStatistics = new Intent(MainMenuActivity.this, SessionStatistics.class);
+        sessionStatistics.putExtra("method", "bars");
+        sessionStatistics.putExtra("username", username);
+        startActivity(sessionStatistics);
     }
 
     @Override
@@ -100,6 +103,11 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     @Override
     public void showError() {
         Toast.makeText( getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showName (String welcome) {
+        tvName.setText(welcome);
     }
 
     /*private void getPosts(final ArrayAdapter arrayAdapter) {

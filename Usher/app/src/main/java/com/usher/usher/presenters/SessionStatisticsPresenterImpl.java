@@ -5,6 +5,9 @@ import com.usher.usher.interactors.SessionStatisticsInteractorImpl;
 import com.usher.usher.interfaces.SessionStatisticsInteractor;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
+import com.usher.usher.views.SessionStatistics;
+
+import org.json.JSONObject;
 
 public class SessionStatisticsPresenterImpl implements SessionStatisticsPresenter {
 
@@ -18,4 +21,13 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
         interactor = new SessionStatisticsInteractorImpl(this);
     }
 
+    @Override
+    public void fillSpinner(String username) {
+        interactor.getSessionList(username, (SessionStatistics) view);
+    }
+
+    @Override
+    public void listSessions (JSONObject jsonResponse){
+
+    }
 }

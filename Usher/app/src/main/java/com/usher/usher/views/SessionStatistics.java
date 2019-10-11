@@ -1,5 +1,6 @@
 package com.usher.usher.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,13 +11,17 @@ import android.widget.Spinner;
 
 import com.usher.usher.ChartFragment;
 import com.usher.usher.R;
+import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
+import com.usher.usher.presenters.SessionStatisticsPresenterImpl;
 
 public class SessionStatistics extends AppCompatActivity implements SessionStatisticsView {
 
     private Spinner spinner;
     private Button btn_update;
     private ProgressBar pr_progressSession;
+    private SessionStatisticsPresenter presenter;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,12 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         btn_update = findViewById(R.id.btn_update);
         pr_progressSession = findViewById(R.id.progressSession);
 
+        final Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+
+        presenter = new SessionStatisticsPresenterImpl(this);
+
+        presenter.fillSpinner(username);
         String method  = getIntent().getStringExtra("method");
         ChartFragment chartFragment = new ChartFragment();
         Bundle bundle = new Bundle();

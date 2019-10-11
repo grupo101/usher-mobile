@@ -8,11 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -34,8 +31,7 @@ import retrofit2.Response;
  */
 public class ChartFragment extends Fragment {
 
-    //private BarChart mBarChart;
-    private LineChart mBarChart;
+    private LineChart mLineChart;
     public ChartFragment() {
         // Required empty public constructor
     }
@@ -47,7 +43,7 @@ public class ChartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        mBarChart = view.findViewById(R.id.barChart);
+        mLineChart = view.findViewById(R.id.barChart);
         getChart(getArguments().getString("method"));
         return view;
     }
@@ -60,31 +56,6 @@ public class ChartFragment extends Fragment {
             public void onResponse(Call<List<BlockStatistics>> call, Response<List<BlockStatistics>> response) {
                 if (response.body() != null){
                     if(method.equals("bars")){
-                        /*List<BarEntry> barEntries = new ArrayList<>();
-
-                        for(BlockStatistics line : response.body()){
-                            barEntries.add(new BarEntry(line.getTime(),line.getTotal()));
-                        }
-
-                        BarDataSet barDataSet = new BarDataSet(barEntries, "Representación cada 15 minutos");
-                        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                        barDataSet.setValueTextSize(15f);
-
-                        BarData barData = new BarData(barDataSet);
-                        barData.setBarWidth(1f);
-                        barData.setValueTextSize(15f);
-
-                        mBarChart.setVisibility(View.VISIBLE);
-                        mBarChart.animateY(5000);
-                        mBarChart.setData(barData);
-                        mBarChart.setFitBars(true);
-
-                        Description description = new Description();
-                        description.setText("Cantidad de Presentes");
-                        description.setTextSize(15f);
-                        mBarChart.setDescription(description);
-                        mBarChart.invalidate();*/
-
                         List<Entry> entries = new ArrayList<>();
 
                         for(BlockStatistics line : response.body()){
@@ -108,15 +79,15 @@ public class ChartFragment extends Fragment {
                         lineData.setValueTextColor(Color.GRAY);
                         lineData.setValueTextSize(9f);
 
-                        mBarChart.setVisibility(View.VISIBLE);
-                        mBarChart.animateY(5000);
-                        mBarChart.setData(lineData);
+                        mLineChart.setVisibility(View.VISIBLE);
+                        mLineChart.animateY(5000);
+                        mLineChart.setData(lineData);
 
                         Description description = new Description();
                         description.setText("Cantidad de Presentes");
                         description.setTextSize(15f);
-                        mBarChart.setDescription(description);
-                        mBarChart.invalidate();
+                        mLineChart.setDescription(description);
+                        mLineChart.invalidate();
                     }
                 }
             }
