@@ -1,6 +1,7 @@
 package com.usher.usher.views;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,8 +26,10 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
     private ProgressBar pr_progressSession;
     private SessionStatisticsPresenter presenter;
     private String username, method, spinString;
+    private String[] session;
     ChartFragment chartFragment;
     Bundle bundle;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +48,14 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         bundle = new Bundle();
         bundle.putString("method",method);
         bundle.putString("username",username);
-        bundle.putString("session","15");
 
-        chartFragment.setArguments(bundle);
-
-
+        //bundle.putString("session","15");
         presenter = new SessionStatisticsPresenterImpl(this);
-
         presenter.fillSpinner(username);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,chartFragment).commit();
+
+
+        //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,chartFragment).commit();
 
 
         btn_lineChart.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +63,12 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
             @Override
             public void onClick(View view) {
                 bundle.putString("method","bars");
-                spinString = spinner.getSelectedItem().toString();
-                String[] session  = spinString.split(".");
+                session  = spinner.getSelectedItem().toString().split("\\.");
                 bundle.putString("session",session[0]);
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.detach(chartFragment);
+                fragmentTransaction.attach(chartFragment);
+                fragmentTransaction.commit();
                 //presenter.updateFragment(method, username, parts[0]);
             }
         });
@@ -73,10 +77,7 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
 
             @Override
             public void onClick(View view) {
-                method = "pie";
-                //spinString = spinner.getSelectedItem().toString()
-                //String[] session  = spinString.split(".");
-
+                bundle.putString("method","pie");
                 //presenter.updateFragment(method, username, parts[0]);
             }
         });
@@ -108,6 +109,11 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         list_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(list_adapter);
         spinner.setSelection(0);
+        session  = spinner.getSelectedItem().toString().split("\\.");
+        bundle.putString("session",session[0]);
+        chartFragment.setArguments(bundle);
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container,chartFragment).commit();
 
     }
 }

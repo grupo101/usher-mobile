@@ -42,11 +42,6 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
         presenter.setName(intent.getStringExtra("name"), intent.getStringExtra("surname"));
 
-        /*final String name = intent.getStringExtra("name");
-        String
-        String name_show = "Bienvenido: " + name + " " + surname;
-        tvName.setText(name_show);*/
-
         btn_sesion.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -110,28 +105,5 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         tvName.setText(welcome);
     }
 
-    /*private void getPosts(final ArrayAdapter arrayAdapter) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        PostService postService = retrofit.create(PostService.class);
-        Call< List<PostObject> > call = postService.getPost();
-
-        call.enqueue(new Callback<List<PostObject>>() {
-            @Override
-            public void onResponse(Call<List<PostObject>> call, Response<List<PostObject>> response) {
-                for(PostObject post : response.body()) {
-                    titles.add(post.getTitle());
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<PostObject>> call, Throwable t) {
-            }
-        });
-    }*/
 
 }
