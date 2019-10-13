@@ -35,7 +35,7 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
         ArrayList<String> arrayList = new ArrayList<String>();
         String coment = null;
         int idSession;
-        for (int i = jsonResponse.length() - 1; i > 0; i--) {
+        for (int i = jsonResponse.length() - 2; i > -1; i--) {
             coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");
             idSession = Integer.parseInt(jsonResponse.getJSONObject(Integer.toString(i)).getString("session"));
             arrayList.add(idSession + ". " + coment);

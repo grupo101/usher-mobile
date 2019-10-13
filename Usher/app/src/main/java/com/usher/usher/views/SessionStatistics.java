@@ -24,7 +24,7 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
     private Button btn_lineChart, btn_pieChart;
     private ProgressBar pr_progressSession;
     private SessionStatisticsPresenter presenter;
-    private String username, method;
+    private String username, method, spinString;
     ChartFragment chartFragment;
     Bundle bundle;
 
@@ -61,10 +61,10 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
 
             @Override
             public void onClick(View view) {
-                method = "bars";
-                //spinString = spinner.getSelectedItem().toString()
-                //String[] session  = spinString.split(".");
-
+                bundle.putString("method","bars");
+                spinString = spinner.getSelectedItem().toString();
+                String[] session  = spinString.split(".");
+                bundle.putString("session",session[0]);
                 //presenter.updateFragment(method, username, parts[0]);
             }
         });
