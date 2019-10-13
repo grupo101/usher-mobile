@@ -29,8 +29,8 @@ public class SessionStatisticsInteractorImpl implements SessionStatisticsInterac
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonResponse = new JSONObject(response);
                     int i = 0;
+                    JSONObject jsonResponse = new JSONObject(response);
                     boolean succes = jsonResponse.getBoolean("succes");
                     if (succes)
                         presenter.listSessions(jsonResponse);

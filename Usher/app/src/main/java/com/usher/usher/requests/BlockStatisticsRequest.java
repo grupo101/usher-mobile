@@ -1,22 +1,28 @@
 package com.usher.usher.requests;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
-public class BlockStatisticsRequest {
+import java.util.HashMap;
+import java.util.Map;
 
-    private static final String BASE_URL = "http:/192.168.1.101:8080/";
-    //private static final String BASE_URL = "http:/10.20.56.72:8080/";
-    private static Retrofit retrofit;
+public class BlockStatisticsRequest extends StringRequest {
 
-    public static Retrofit getApiClient(){
+    private static final String BLOCK_REQUEST_URL="https://usher.sytes.net/usher-api/block_hist?token=48370255gBrgdlpl050588";
+    private Map<String,String> params;
 
-        if (retrofit==null){
-            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).
-                    addConverterFactory(GsonConverterFactory.create()).build();
+    public BlockStatisticsRequest (String username, String session, Response.Listener<String> listener ){
 
-        }
-
-        return retrofit;
+        super(Request.Method.POST,BLOCK_REQUEST_URL,listener,null);
+        params= new HashMap<>();
+        params.put("username",username);
+        params.put("session",session);
     }
+
+    @Override
+    public Map<String, String> getParams() {
+        return params;
+    }
+
 }

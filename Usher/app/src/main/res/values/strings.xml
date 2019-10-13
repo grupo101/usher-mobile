@@ -14,7 +14,8 @@
     <string name="b_signup">REGISTRARSE AHORA</string>
     <string name="tv_signuptxt">No tenes cuenta?</string>
     <string name="i_descLogo">Logo</string>
-    <string name="b_update">Actualizar</string>
+    <string name="b_updateLine">Informe Bloque</string>
+    <string name="b_updatePie">Informe Diputados</string>
     <string name="b_quorum">QUORUM</string>
     <string name="tv_missing">Ausentes:</string>
     <string name="tv_present">Presentes:</string>

@@ -32,15 +32,15 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
 
     @Override
     public void listSessions (JSONObject jsonResponse) throws JSONException {
-        int z = jsonResponse.length();
         ArrayList<String> arrayList = new ArrayList<String>();
-        String coment = new String();
-        for (int i = 1; i < z; i++) {
-            if (i > 0)
-                coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");
-                arrayList.add(coment);
-                view.loadList(arrayList);
+        String coment = null;
+        int idSession;
+        for (int i = jsonResponse.length() - 1; i > 0; i--) {
+            coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");
+            idSession = Integer.parseInt(jsonResponse.getJSONObject(Integer.toString(i)).getString("session"));
+            arrayList.add(idSession + ". " + coment);
         }
+        view.loadList(arrayList);
     }
 
 }
