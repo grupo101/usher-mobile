@@ -28,13 +28,13 @@ public class SessionView extends View {
 
     String linea;
     Paint elemento;
-    Paint numberSeats, paintDefault;
+    Paint numberSeats, marginLines;
     List<Paint> camara;
     int pos;
     int taam;
-    int[] TAM;
     Button btn_Quorum, btn_Pres, btn_Aus;
     private boolean isRender = false;
+    private boolean isCamaraNotSet = true;
 
 
     public SessionView(Context context) {
@@ -52,54 +52,15 @@ public class SessionView extends View {
     }
 
     private void init(@Nullable AttributeSet set, final Context context){
-        final int tam = 100;
         camara = new ArrayList<>();
         btn_Aus = ((OpenSession)context).findViewById(R.id.btn_aus);
         btn_Pres = ((OpenSession)context).findViewById(R.id.btn_pres);
         btn_Quorum = ((OpenSession)context).findViewById(R.id.btn_Quorum);
-        TAM = new int[1];
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean succes = jsonResponse.getBoolean("succes");
-                    int i;
-                    if (succes) {
-                        TAM[0] = jsonResponse.getString("status").length();
-                        taam = TAM[0];
-
-                        for (i = 0; i < taam; i++) {
-                            elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            elemento.setColor(Color.GRAY);
-                            camara.add(elemento);
-                        }
-                        setRender(true);
-                    } else{
-                        setRender(false);
-                        for (i = 0; i < tam; i++) {
-                            elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            elemento.setColor(Color.GRAY);
-                            camara.add(elemento);
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        RefreshRequest refreshRequest= new RefreshRequest(responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        queue.add(refreshRequest);
-
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
         numberSeats.setTextSize(20);
-        paintDefault = new Paint();
-        paintDefault.setColor(Color.GRAY);
+        marginLines = new Paint();
+        marginLines.setColor(Color.BLACK);
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask(){
@@ -123,7 +84,14 @@ public class SessionView extends View {
                                     if (linea.charAt(i) == '0')
                                         presente++;
                                     else ausente++;
+
+                                    if(isCamaraNotSet) {
+                                        elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
+                                        elemento.setColor(Color.GRAY);
+                                        camara.add(elemento);
+                                    }
                                 }
+                                isCamaraNotSet = false;
                                 if (presente>ausente) {
                                     if (btn_Quorum != null)
                                         btn_Quorum.setBackgroundColor(Color.GREEN);
@@ -165,10 +133,10 @@ public class SessionView extends View {
         int ancho = getWidth();
         int alto = getHeight();
         int desply = 0;
-        canvas.drawLine(25, 25, ancho - 25, 25, numberSeats);
-        canvas.drawLine(ancho - 25, 25, ancho - 25, alto - 25, numberSeats);
-        canvas.drawLine(ancho - 25, alto - 25, 25, alto - 25, numberSeats);
-        canvas.drawLine(25, alto - 25, 25, 25, numberSeats);
+        canvas.drawLine(25, 25, ancho - 25, 25, marginLines);
+        canvas.drawLine(ancho - 25, 25, ancho - 25, alto - 25, marginLines);
+        canvas.drawLine(ancho - 25, alto - 25, 25, alto - 25, marginLines);
+        canvas.drawLine(25, alto - 25, 25, 25, marginLines);
         pos = 0;
         int i;
         if (isRender) {
@@ -181,10 +149,9 @@ public class SessionView extends View {
                     pos = ancho / 11;
                     desply = desply + alto / 11;
                 }
-                if (camara.size() > 0)
-                    canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, camara.get(i));
-                else
-                    canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, paintDefault);
+
+                canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, camara.get(i));
+
                 String ubicacion = Integer.toString(i + 1);
                 if (i < 9)
                     canvas.drawText(ubicacion, pos - 5, (alto / 11) + desply + 10, numberSeats);
