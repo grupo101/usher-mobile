@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-import com.usher.usher.ChartFragment;
 import com.usher.usher.R;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
@@ -48,8 +47,6 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         bundle = new Bundle();
         bundle.putString("method",method);
         bundle.putString("username",username);
-
-        //bundle.putString("session","15");
         presenter = new SessionStatisticsPresenterImpl(this);
         presenter.fillSpinner(username);
 

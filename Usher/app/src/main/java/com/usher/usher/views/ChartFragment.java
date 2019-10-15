@@ -1,4 +1,4 @@
-package com.usher.usher;
+package com.usher.usher.views;
 
 
 import android.graphics.Color;
@@ -20,9 +20,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.usher.usher.interfaces.SessionStatisticsView;
+import com.usher.usher.R;
+import com.usher.usher.interfaces.ChartFragmantPresenter;
+import com.usher.usher.interfaces.ChartFragmentView;
+import com.usher.usher.presenters.ChartFragmentPresenterImpl;
 import com.usher.usher.requests.BlockStatisticsRequest;
-import com.usher.usher.views.SessionStatistics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,13 +36,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChartFragment extends Fragment {
+public class ChartFragment extends Fragment implements ChartFragmentView {
 
     private LineChart mLineChart;
     private RecyclerView mRecyceViewPieChart;
     public ChartFragment() {
         // Required empty public constructor
     }
+    private ChartFragmantPresenter presenter;
     private SessionStatistics sessionStatistics;
     private Response.Listener<String> responseListener;
 
@@ -52,11 +55,16 @@ public class ChartFragment extends Fragment {
         mLineChart = view.findViewById(R.id.barChart);
         mRecyceViewPieChart = view.findViewById(R.id.pieChart);
         sessionStatistics = (SessionStatistics) getActivity();
-        getChart(getArguments().getString("method"), getArguments().getString("username"), getArguments().getString("session"));
+
+        presenter = new ChartFragmentPresenterImpl(this);
+
+        presenter.getChart(getArguments().getString("method"), getArguments().getString("username"), getArguments().getString("session"), sessionStatistics);
+
+        //getChart(getArguments().getString("method"), getArguments().getString("username"), getArguments().getString("session"));
         return view;
     }
 
-    private void getChart(final String method, String username, String session){
+    /*private void getChart(final String method, String username, String session){
         if(method.equals("bars")) {
             responseListener = new Response.Listener<String>() {
                 @Override
@@ -117,5 +125,25 @@ public class ChartFragment extends Fragment {
             //ACA SE CARGARIA EL RECYCLERVIEW
 
         }
+    }*/
+
+    @Override
+    public void showChartView(LineData lineData, Description description) {
+        mLineChart.setVisibility(View.VISIBLE);
+        mLineChart.animateY(3000);
+        mLineChart.setData(lineData);
+        mLineChart.setDescription(description);
+        mLineChart.invalidate();
     }
+
+    @Override
+    public void showChartFailed() {
+        Toast.makeText( getContext(), "No existen estadisticas para la sesion seleccionada", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText( getContext(), "Error", Toast.LENGTH_LONG).show();
+    }
+
 }
