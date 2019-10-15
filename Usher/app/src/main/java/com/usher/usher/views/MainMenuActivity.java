@@ -20,10 +20,11 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
 
     private TextView tvUser, tvName, tvSurname, tvPassword;
-    private Button btn_sesion, btn_out, btn_hist;
+    private Button btn_sesion, btn_out, btn_hist, btn_edit;
     private ProgressBar pr_progressMainMenu;
     private MainMenuActivityPresenter presenter;
-    private String username;
+    private String username, password, name, surname;
+    private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,17 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         btn_sesion = findViewById(R.id.btn_sess);
         btn_out = findViewById(R.id.btn_out);
         btn_hist = findViewById(R.id.btn_historial);
+        btn_edit = findViewById(R.id.btn_editprof);
         pr_progressMainMenu = findViewById(R.id.progressMainMenu);
         final Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        name = intent.getStringExtra("name");
+        surname = intent.getStringExtra("surname");
+        password = intent.getStringExtra("password");
         //Pasamos metodos del View al Presenter
         presenter = new MainMenuActivityPresenterImpl(this);
 
-        presenter.setName(intent.getStringExtra("name"), intent.getStringExtra("surname"));
+        presenter.setName(name, surname);
 
         btn_sesion.setOnClickListener(new View.OnClickListener() {
 
@@ -57,6 +62,17 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
             }
         });
 
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentEditProfile = new Intent(MainMenuActivity.this, EditActivity.class);
+                intentEditProfile.putExtra("name", name);
+                intentEditProfile.putExtra("surname", surname);
+                intentEditProfile.putExtra("username", username);
+                intentEditProfile.putExtra("password", password);
+                MainMenuActivity.this.startActivityForResult(intentEditProfile, EDIT_ACTIVITY_REQUEST_CODE);
+            }
+        });
         btn_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +80,20 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
                 System.exit(0);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Check that it is the EditActivity with an OK result
+        if (requestCode == EDIT_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                name = data.getStringExtra("name");
+                surname = data.getStringExtra("surname");
+                password = data.getStringExtra("password");
+                presenter.setName(name , surname);
+            }
+        }
     }
 
     @Override
