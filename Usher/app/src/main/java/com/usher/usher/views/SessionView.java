@@ -41,6 +41,7 @@ public class SessionView extends View {
         super(context);
         init(null, context);
     }
+
     public SessionView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, context);
@@ -51,11 +52,11 @@ public class SessionView extends View {
         init(attrs, context);
     }
 
-    private void init(@Nullable AttributeSet set, final Context context){
+    private void init(@Nullable AttributeSet set, final Context context) {
         camara = new ArrayList<>();
-        btn_Aus = ((OpenSession)context).findViewById(R.id.btn_aus);
-        btn_Pres = ((OpenSession)context).findViewById(R.id.btn_pres);
-        btn_Quorum = ((OpenSession)context).findViewById(R.id.btn_Quorum);
+        btn_Aus = ((OpenSession) context).findViewById(R.id.btn_aus);
+        btn_Pres = ((OpenSession) context).findViewById(R.id.btn_pres);
+        btn_Quorum = ((OpenSession) context).findViewById(R.id.btn_Quorum);
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
         numberSeats.setTextSize(20);
@@ -63,46 +64,46 @@ public class SessionView extends View {
         marginLines.setColor(Color.BLACK);
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask(){
+        timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
 
-                Response.Listener<String> responseListener = new Response.Listener<String>(){
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     @Override
-                    public void onResponse(String response){
+                    public void onResponse(String response) {
 
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean succes = jsonResponse.getBoolean("succes");
 
-                            if(succes){
+                            if (succes) {
                                 linea = jsonResponse.getString("status");
                                 taam = linea.length();
                                 int i, presente = 0, ausente = 0;
-                                for (i = 0; i<linea.length(); i++) {
+                                for (i = 0; i < linea.length(); i++) {
 
                                     if (linea.charAt(i) == '0')
                                         presente++;
                                     else ausente++;
 
-                                    if(isCamaraNotSet) {
+                                    if (isCamaraNotSet) {
                                         elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
                                         elemento.setColor(Color.GRAY);
                                         camara.add(elemento);
                                     }
                                 }
                                 isCamaraNotSet = false;
-                                if (presente>ausente) {
+                                if (presente > ausente) {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(Color.GREEN);
-                                }else {
+                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                } else {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(Color.RED);
+                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                 }
-                                if (btn_Pres !=null){
+                                if (btn_Pres != null) {
                                     btn_Pres.setText(String.valueOf(presente));
                                 }
-                                if (btn_Aus !=null){
+                                if (btn_Aus != null) {
                                     btn_Aus.setText(String.valueOf(ausente));
                                 }
                                 setRender(true);
@@ -115,7 +116,7 @@ public class SessionView extends View {
                     }
                 };
 
-                RefreshRequest refreshRequest= new RefreshRequest(responseListener);
+                RefreshRequest refreshRequest = new RefreshRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
                 queue.add(refreshRequest);
 
@@ -123,8 +124,7 @@ public class SessionView extends View {
         }, 0, 3 * 1000L);//3 seconds
     }
 
-    public void setRender(boolean render)
-    {
+    public void setRender(boolean render) {
         isRender = render;
     }
 
@@ -141,7 +141,7 @@ public class SessionView extends View {
         int i;
         if (isRender) {
             for (i = 0; i < taam; i++) {
-                camara.get(i).setColor(linea.charAt(i) == '0' ? Color.GREEN : Color.RED);
+                camara.get(i).setColor(linea.charAt(i) == '0' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
 
                 if ((pos + ancho / 10) < ancho) {
                     pos = pos + ancho / 11;
