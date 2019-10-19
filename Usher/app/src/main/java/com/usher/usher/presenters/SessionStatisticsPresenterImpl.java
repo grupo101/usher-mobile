@@ -7,7 +7,6 @@ import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
 import com.usher.usher.views.SessionStatistics;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +40,7 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
             arrayList.add(idSession + ". " + coment);
         }
         view.loadList(arrayList);
+        view.loadTabLayoutFragments();
     }
 
 }

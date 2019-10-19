@@ -44,6 +44,5 @@ public class SessionStatisticsInteractorImpl implements SessionStatisticsInterac
         SessionListRequest sessionListRequest = new SessionListRequest(username, responseListener);
         RequestQueue queue = Volley.newRequestQueue(sessionStatistics);
         queue.add(sessionListRequest);
-
     }
 }

@@ -40,12 +40,13 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
     private LineChart mLineChart;
     private RecyclerView mRecyceViewPieChart;
-    public ChartFragment() {
-        // Required empty public constructor
-    }
     private ChartFragmantPresenter presenter;
     private SessionStatistics sessionStatistics;
     private Response.Listener<String> responseListener;
+
+    public ChartFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +59,10 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
         presenter = new ChartFragmentPresenterImpl(this);
 
-        presenter.getChart(getArguments().getString("method"), getArguments().getString("username"), getArguments().getString("session"), sessionStatistics);
+        presenter.getChart(getArguments().getString("method"),
+                getArguments().getString("username"),
+                getArguments().getString("session"),
+                sessionStatistics);
 
         //getChart(getArguments().getString("method"), getArguments().getString("username"), getArguments().getString("session"));
         return view;
@@ -138,12 +142,12 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
     @Override
     public void showChartFailed() {
-        Toast.makeText( getContext(), "No existen estadisticas para la sesion seleccionada", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "No existen estadisticas para la sesion seleccionada", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText( getContext(), "Error", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
     }
 
 }

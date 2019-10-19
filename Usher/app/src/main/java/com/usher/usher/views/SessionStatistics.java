@@ -1,11 +1,14 @@
 package com.usher.usher.views;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -15,6 +18,8 @@ import com.usher.usher.R;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
 import com.usher.usher.presenters.SessionStatisticsPresenterImpl;
+
+import org.intellij.lang.annotations.JdkConstants;
 
 import java.util.ArrayList;
 
@@ -27,8 +32,13 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
     private String username, method, spinString;
     private String[] session;
     ChartFragment chartFragment;
+    RepresentativeFragment representativeFragment;
     Bundle bundle;
     FragmentTransaction fragmentTransaction;
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,10 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         btn_pieChart = findViewById(R.id.btn_updatePie);
         pr_progressSession = findViewById(R.id.progressSession);
 
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewpager);
+
+
         final Intent intent = getIntent();
         username = intent.getStringExtra("username");
         method  = getIntent().getStringExtra("method");
@@ -50,37 +64,30 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         presenter = new SessionStatisticsPresenterImpl(this);
         presenter.fillSpinner(username);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-
-        //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,chartFragment).commit();
-
-
-        btn_lineChart.setOnClickListener(new View.OnClickListener() {
+            //Debe refrescar ambos fragmentos
 
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
+                //Fragment Chart
                 bundle.putString("method","bars");
                 session  = spinner.getSelectedItem().toString().split("\\.");
                 bundle.putString("session",session[0]);
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.detach(chartFragment);
-                fragmentTransaction.attach(chartFragment);
+                fragmentTransaction.detach(chartFragment).detach(representativeFragment);
+                fragmentTransaction.attach(chartFragment).attach(representativeFragment);
                 fragmentTransaction.commit();
-                //presenter.updateFragment(method, username, parts[0]);
-            }
-        });
 
-        btn_pieChart.setOnClickListener(new View.OnClickListener() {
+                //Fragment Representative
+                //XXXXXX
+            }
 
             @Override
-            public void onClick(View view) {
-                bundle.putString("method","pie");
-                //presenter.updateFragment(method, username, parts[0]);
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -98,6 +105,25 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         pr_progressSession.setVisibility(option ? View.VISIBLE : View.GONE);
     }
 
+    @Override
+    public void loadTabLayoutFragments() {
+        //Inicio del Fragmento Chart
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        //Inicio del Fragmento de Recycler
+        //XXXXXX
+
+        //Inicio de el paginador de ViewHolder
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        //Aca va el de las estadisticas generales
+        representativeFragment = new RepresentativeFragment();
+        viewPagerAdapter.addFragments(chartFragment, getString(R.string.b_updateLine));
+        //Aca iria el de los representantes
+        viewPagerAdapter.addFragments(representativeFragment, getString(R.string.b_updatePie));
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+
 
     @Override
     public void loadList (ArrayList arrayList){
@@ -109,8 +135,5 @@ public class SessionStatistics extends AppCompatActivity implements SessionStati
         session  = spinner.getSelectedItem().toString().split("\\.");
         bundle.putString("session",session[0]);
         chartFragment.setArguments(bundle);
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container,chartFragment).commit();
-
     }
 }
