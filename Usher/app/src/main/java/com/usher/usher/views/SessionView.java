@@ -14,7 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.usher.usher.OpenSession;
 import com.usher.usher.R;
-import com.usher.usher.RefreshRequest;
+import com.usher.usher.requests.RefreshRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,19 +28,20 @@ public class SessionView extends View {
 
     String linea;
     Paint elemento;
-    Paint numberSeats;
+    Paint numberSeats, marginLines;
     List<Paint> camara;
-    int pos, presente, ausente;
+    int pos;
     int taam;
-    int[] TAM;
     Button btn_Quorum, btn_Pres, btn_Aus;
-    boolean show;
+    private boolean isRender = false;
+    private boolean isCamaraNotSet = true;
 
 
     public SessionView(Context context) {
         super(context);
         init(null, context);
     }
+
     public SessionView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, context);
@@ -51,153 +52,114 @@ public class SessionView extends View {
         init(attrs, context);
     }
 
-    /*public SessionView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }*/
-
-    private void init(@Nullable AttributeSet set, final Context context){
-        final int tam = 100;
+    private void init(@Nullable AttributeSet set, final Context context) {
         camara = new ArrayList<>();
-        btn_Aus = ((OpenSession)context).findViewById(R.id.btn_aus);
-        btn_Pres = ((OpenSession)context).findViewById(R.id.btn_pres);
-        btn_Quorum = ((OpenSession)context).findViewById(R.id.btn_Quorum);
-        TAM = new int[1];
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean succes = jsonResponse.getBoolean("succes");
-                    int i;
-                    if (succes) {
-                        show = true;
-                        TAM[0] = jsonResponse.getString("status").length();
-                        taam = TAM[0];
-
-                        for (i = 0; i < taam; i++) {
-                            elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            elemento.setColor(Color.GRAY);
-                            camara.add(elemento);
-                        }
-                    } else{
-                        show = false;
-                        for (i = 0; i < tam; i++) {
-                            elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
-                            elemento.setColor(Color.GRAY);
-                            camara.add(elemento);
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        RefreshRequest refreshRequest= new RefreshRequest(responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        queue.add(refreshRequest);
-
-        //linea = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
-
-
+        btn_Aus = ((OpenSession) context).findViewById(R.id.btn_aus);
+        btn_Pres = ((OpenSession) context).findViewById(R.id.btn_pres);
+        btn_Quorum = ((OpenSession) context).findViewById(R.id.btn_Quorum);
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
-        numberSeats.setTextSize(40);
-
+        numberSeats.setTextSize(20);
+        marginLines = new Paint();
+        marginLines.setColor(Color.BLACK);
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask(){
+        timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
 
-                Response.Listener<String> responseListener = new Response.Listener<String>(){
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     @Override
-                    public void onResponse(String response){
+                    public void onResponse(String response) {
 
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean succes = jsonResponse.getBoolean("succes");
 
-                            if(succes){
-                                show = true;
+                            if (succes) {
                                 linea = jsonResponse.getString("status");
                                 taam = linea.length();
                                 int i, presente = 0, ausente = 0;
-                                for (i = 0; i<linea.length(); i++) {
+                                for (i = 0; i < linea.length(); i++) {
 
                                     if (linea.charAt(i) == '0')
                                         presente++;
                                     else ausente++;
+
+                                    if (isCamaraNotSet) {
+                                        elemento = new Paint(Paint.ANTI_ALIAS_FLAG);
+                                        elemento.setColor(Color.GRAY);
+                                        camara.add(elemento);
+                                    }
                                 }
-                                if (presente>ausente) {
+                                isCamaraNotSet = false;
+                                if (presente > ausente) {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(Color.GREEN);
-                                }else {
+                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                } else {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(Color.RED);
+                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                 }
-                                if (btn_Pres !=null){
+                                if (btn_Pres != null) {
                                     btn_Pres.setText(String.valueOf(presente));
                                 }
-                                if (btn_Aus !=null){
+                                if (btn_Aus != null) {
                                     btn_Aus.setText(String.valueOf(ausente));
                                 }
+                                setRender(true);
                                 postInvalidate();
-
                             } else
-                                show = false;
+                                setRender(false);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
 
-                RefreshRequest refreshRequest= new RefreshRequest(responseListener);
+                RefreshRequest refreshRequest = new RefreshRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
                 queue.add(refreshRequest);
-
-
-
-
 
             }
         }, 0, 3 * 1000L);//3 seconds
     }
 
+    public void setRender(boolean render) {
+        isRender = render;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
-    //public void onDraw(Canvas canvas) {
-        int anchoMitad = (getWidth()/2);
         int ancho = getWidth();
         int alto = getHeight();
         int desply = 0;
-        canvas.drawLine(50, 50, ancho - 50, 50, numberSeats);
-        canvas.drawLine(ancho - 50, 50, ancho - 50, alto - 50, numberSeats);
-        canvas.drawLine(ancho - 50, alto - 50, 50, alto - 50, numberSeats);
-        canvas.drawLine(50, alto - 50, 50, 50, numberSeats);
+        canvas.drawLine(25, 25, ancho - 25, 25, marginLines);
+        canvas.drawLine(ancho - 25, 25, ancho - 25, alto - 25, marginLines);
+        canvas.drawLine(ancho - 25, alto - 25, 25, alto - 25, marginLines);
+        canvas.drawLine(25, alto - 25, 25, 25, marginLines);
         pos = 0;
         int i;
-        for (i = 0; i < taam; i++) {
-            if (show)
-                camara.get(i).setColor(linea.charAt(i) == '0' ? Color.GREEN : Color.RED);
+        if (isRender) {
+            for (i = 0; i < taam; i++) {
+                camara.get(i).setColor(linea.charAt(i) == '0' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
 
-            if ((pos + ancho / 10) < ancho) {
-                pos = pos + ancho / 11;
-            } else {
-                pos = ancho / 11;
-                desply = desply + ancho / 11;
+                if ((pos + ancho / 10) < ancho) {
+                    pos = pos + ancho / 11;
+                } else {
+                    pos = ancho / 11;
+                    desply = desply + alto / 11;
+                }
+
+                canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, camara.get(i));
+
+                String ubicacion = Integer.toString(i + 1);
+                if (i < 9)
+                    canvas.drawText(ubicacion, pos - 5, (alto / 11) + desply + 10, numberSeats);
+                else if (i < 99)
+                    canvas.drawText(ubicacion, pos - 13, (alto / 11) + desply + 10, numberSeats);
+                else
+                    canvas.drawText(ubicacion, pos - 23, (alto / 11) + desply + 10, numberSeats);
             }
-            canvas.drawCircle(pos, ancho / 11 + desply, ancho / 30, camara.get(i));
-            String ubicacion = Integer.toString(i + 1);
-            if (i < 9)
-                canvas.drawText(ubicacion, pos - 10, (ancho / 11) + desply + 10, numberSeats);
-            else if (i < 99)
-                canvas.drawText(ubicacion, pos - 20, (ancho / 11) + desply + 10, numberSeats);
-            else
-                canvas.drawText(ubicacion, pos - 30, (ancho / 11) + desply + 10, numberSeats);
         }
     }
 }

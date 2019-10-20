@@ -1,4 +1,6 @@
-package com.usher.usher;
+package com.usher.usher.services;
+
+import com.usher.usher.PostObject;
 
 import java.util.List;
 import retrofit2.Call;
