@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityVie
         et_passwordLogin = findViewById(R.id.etPassLogin);
         pr_progresBarLogin = findViewById(R.id.progressLogin);
 
-        //Pasamos metodos del View al Presenter
         presenter = new LoginActivityPresenterImpl(this);
 
         tv_registerUser.setOnClickListener(new View.OnClickListener() {

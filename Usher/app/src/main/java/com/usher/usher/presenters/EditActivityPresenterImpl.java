@@ -21,9 +21,9 @@ public class EditActivityPresenterImpl implements EditActivityPresenter {
     private String error;
 
     public EditActivityPresenterImpl(EditActivityView view) {
-        //Por aca recibe lo de la vista con sus parametros como constructor
+
         this.view = view;
-        //Por aca paso los metodos del presentador al interactor
+
         interactor = new EditActivityInteractorImpl(this);
     }
 
@@ -38,17 +38,6 @@ public class EditActivityPresenterImpl implements EditActivityPresenter {
             this.newPassword = newPassword;
             interactor.updateProfile(this.name,this.surname, this.username, this.password, this.newPassword, (EditActivity) view);
         }
-        /*else if ( username.isEmpty() ){
-            view.showProgress(false);
-            view.onUsernameClean();
-        }
-        else if ( password.isEmpty() ){
-            view.showProgress(false);
-            view.onPasswordClean();
-        }else{
-            view.showProgress(false);
-            view.onFailedDataCharge();
-        }*/
     }
 
     @Override
