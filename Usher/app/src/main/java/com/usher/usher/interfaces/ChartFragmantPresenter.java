@@ -1,13 +1,13 @@
 package com.usher.usher.interfaces;
 
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public interface ChartFragmantPresenter {
 
-    void getChart(String method, String username, String session, SessionStatistics sessionStatistics);
+    void getChart(String method, String username, String session, SessionStatisticsActivity sessionStatistics);
 
     void showErrorPresenter(JSONException e);
 

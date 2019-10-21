@@ -6,10 +6,8 @@ import com.android.volley.toolbox.Volley;
 import com.usher.usher.interfaces.SessionStatisticsInteractor;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.requests.SessionListRequest;
-import com.usher.usher.requests.StatisticsAccessRequest;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +22,7 @@ public class SessionStatisticsInteractorImpl implements SessionStatisticsInterac
     }
 
     @Override
-    public void getSessionList(String username, SessionStatistics sessionStatistics) {
+    public void getSessionList(String username, SessionStatisticsActivity sessionStatistics) {
         responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {

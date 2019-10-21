@@ -6,7 +6,7 @@ import com.usher.usher.interfaces.RepresentativePresenter;
 import com.usher.usher.interfaces.RepresentativeView;
 import com.usher.usher.models.RepresentativeVO;
 import com.usher.usher.views.RepresentativeFragment;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +30,7 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
     }
 
     @Override
-    public void loadRepresentative(String username, String session, SessionStatistics sessionStatistics) {
+    public void loadRepresentative(String username, String session, SessionStatisticsActivity sessionStatistics) {
         interactor.loadRepresentativeData(username, session, sessionStatistics);
     }
 

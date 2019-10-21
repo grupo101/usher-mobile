@@ -5,9 +5,8 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.usher.usher.interfaces.RepresentativeInteractor;
 import com.usher.usher.interfaces.RepresentativePresenter;
-import com.usher.usher.requests.BlockStatisticsRequest;
 import com.usher.usher.requests.RepresentativeStatisticsRequest;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +21,7 @@ public class RepresentativeInteractorImpl implements RepresentativeInteractor {
     }
 
     @Override
-    public void loadRepresentativeData(String username, String session, SessionStatistics sessionStatistics) {
+    public void loadRepresentativeData(String username, String session, SessionStatisticsActivity sessionStatistics) {
         responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

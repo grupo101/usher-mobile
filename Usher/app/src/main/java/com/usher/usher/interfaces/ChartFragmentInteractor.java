@@ -1,8 +1,7 @@
 package com.usher.usher.interfaces;
 
-import com.usher.usher.views.ChartFragment;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 public interface ChartFragmentInteractor {
-    void getSessionData(String username, String session, SessionStatistics sessionStatistics);
+    void getSessionData(String username, String session, SessionStatisticsActivity sessionStatistics);
 }

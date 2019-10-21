@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".views.EditActivity"></activity>
-        <activity android:name=".views.SessionStatistics" />
+        <activity android:name=".views.SessionStatisticsActivity" />
         <activity
             android:name=".views.LoginActivity"
             android:theme="@style/SplashTheme">
@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OpenSession" />
+        <activity android:name=".views.OpenSessionActivity" />
         <activity android:name=".Splash_screen" />
         <activity android:name=".views.RegisterUserActivity" />
         <activity android:name=".views.MainMenuActivity" />

@@ -5,7 +5,7 @@ import com.usher.usher.interactors.SessionStatisticsInteractorImpl;
 import com.usher.usher.interfaces.SessionStatisticsInteractor;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
 
     @Override
     public void fillSpinner(String username) {
-        interactor.getSessionList(username, (SessionStatistics) view);
+        interactor.getSessionList(username, (SessionStatisticsActivity) view);
     }
 
     @Override

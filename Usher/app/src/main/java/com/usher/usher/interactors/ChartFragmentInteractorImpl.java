@@ -7,8 +7,7 @@ import com.usher.usher.interfaces.ChartFragmantPresenter;
 import com.usher.usher.interfaces.ChartFragmentInteractor;
 import com.usher.usher.presenters.ChartFragmentPresenterImpl;
 import com.usher.usher.requests.BlockStatisticsRequest;
-import com.usher.usher.views.ChartFragment;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +22,7 @@ public class ChartFragmentInteractorImpl implements ChartFragmentInteractor {
     }
 
     @Override
-    public void getSessionData(String username, String session, SessionStatistics sessionStatistics) {
+    public void getSessionData(String username, String session, SessionStatisticsActivity sessionStatistics) {
         responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

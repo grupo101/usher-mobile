@@ -2,7 +2,6 @@ package com.usher.usher.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +9,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.usher.usher.OpenSession;
 import com.usher.usher.R;
 import com.usher.usher.interfaces.MainMenuActivityPresenter;
 import com.usher.usher.interfaces.MainMenuActivityView;
@@ -91,7 +89,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
                 name = data.getStringExtra("name");
                 surname = data.getStringExtra("surname");
                 password = data.getStringExtra("password");
-                presenter.setName(name , surname);
+                presenter.setName(name, surname);
             }
         }
     }
@@ -103,18 +101,18 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
     @Override
     public void onSesion(boolean status) {
-        Intent openSession = new Intent(MainMenuActivity.this, OpenSession.class);
+        Intent openSession = new Intent(MainMenuActivity.this, OpenSessionActivity.class);
         MainMenuActivity.this.startActivity(openSession);
     }
 
     @Override
     public void offSesion(boolean status) {
-        Toast.makeText( getApplicationContext(), "Sesión innactiva. Intente en otro momento", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Sesión innactiva. Intente en otro momento", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void accessSuccessfullView() {
-        Intent sessionStatistics = new Intent(MainMenuActivity.this, SessionStatistics.class);
+        Intent sessionStatistics = new Intent(MainMenuActivity.this, SessionStatisticsActivity.class);
         sessionStatistics.putExtra("method", "bars");
         sessionStatistics.putExtra("username", username);
         startActivity(sessionStatistics);
@@ -122,16 +120,16 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
     @Override
     public void accessFailedView() {
-        Toast.makeText( getApplicationContext(), "No tiene permiso para acceder", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "No tiene permiso para acceder", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText( getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void showName (String welcome) {
+    public void showName(String welcome) {
         tvName.setText(welcome);
     }
 

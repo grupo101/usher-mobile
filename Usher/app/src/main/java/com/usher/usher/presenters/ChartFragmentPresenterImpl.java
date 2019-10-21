@@ -1,16 +1,14 @@
 package com.usher.usher.presenters;
 
 import android.graphics.Color;
-import android.view.View;
 
 import com.usher.usher.interactors.ChartFragmentInteractorImpl;
 import com.usher.usher.interfaces.ChartFragmantPresenter;
 import com.usher.usher.interfaces.ChartFragmentInteractor;
 import com.usher.usher.interfaces.ChartFragmentView;
 import com.usher.usher.views.ChartFragment;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -38,7 +36,7 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
 
 
     @Override
-    public void getChart(String method, String username, String session, SessionStatistics sessionStatistics) {
+    public void getChart(String method, String username, String session, SessionStatisticsActivity sessionStatistics) {
         if(method.equals("bars")) {
             interactor.getSessionData(username,session, sessionStatistics);
         }else if(method.equals("pie")) {

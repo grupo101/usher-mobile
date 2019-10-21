@@ -21,7 +21,7 @@ import com.usher.usher.presenters.SessionStatisticsPresenterImpl;
 
 import java.util.ArrayList;
 
-public class SessionStatistics extends AppCompatActivity implements SessionStatisticsView {
+public class SessionStatisticsActivity extends AppCompatActivity implements SessionStatisticsView {
 
     private Spinner spinner;
     private Button btn_lineChart, btn_pieChart;

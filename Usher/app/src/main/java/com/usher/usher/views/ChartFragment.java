@@ -26,7 +26,7 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
     private LineChart mLineChart;
     private RecyclerView mRecyceViewPieChart;
     private ChartFragmantPresenter presenter;
-    private SessionStatistics sessionStatistics;
+    private SessionStatisticsActivity sessionStatistics;
 
 
     public ChartFragment() {
@@ -38,7 +38,7 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         mLineChart = view.findViewById(R.id.barChart);
-        sessionStatistics = (SessionStatistics) getActivity();
+        sessionStatistics = (SessionStatisticsActivity) getActivity();
 
         presenter = new ChartFragmentPresenterImpl(this);
 

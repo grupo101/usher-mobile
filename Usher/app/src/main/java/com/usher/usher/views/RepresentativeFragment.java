@@ -26,14 +26,14 @@ public class RepresentativeFragment extends Fragment implements RepresentativeVi
     ArrayList<RepresentativeVO> listRepresentative;
     RecyclerView recyclerRepresentative;
     private RepresentativePresenter presenter;
-    private SessionStatistics sessionStatistics;
+    private SessionStatisticsActivity sessionStatistics;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, android.view.ViewGroup container,
                              Bundle savedInstanceState) {
         listRepresentative = new ArrayList<>();
-        sessionStatistics = (SessionStatistics) getActivity();
+        sessionStatistics = (SessionStatisticsActivity) getActivity();
 
         View view = inflater.inflate(R.layout.fragment_chart_representative, container, false);
 
