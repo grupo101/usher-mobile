@@ -45,9 +45,6 @@ public class RepresentativeFragment extends Fragment implements RepresentativeVi
         presenter.loadRepresentative(getArguments().getString("username"), getArguments().getString("session"),
                 sessionStatistics);
 
-        RepresentativeAdapter adapter = new RepresentativeAdapter(listRepresentative);
-        recyclerRepresentative.setAdapter(adapter);
-
         return view;
     }
 
@@ -55,6 +52,8 @@ public class RepresentativeFragment extends Fragment implements RepresentativeVi
     public void showRepresentativeView(ArrayList<RepresentativeVO> listRepresentative) {
         //Union entre los datos del interactor cleneados por el presenter en la view
         this.listRepresentative = listRepresentative;
+        RepresentativeAdapter adapter = new RepresentativeAdapter(listRepresentative);
+        recyclerRepresentative.setAdapter(adapter);
     }
 
     @Override

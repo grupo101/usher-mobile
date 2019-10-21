@@ -20,4 +20,10 @@ public class RepresentativeStatisticsRequest extends StringRequest {
         params.put("username", username);
         params.put("session", session);
     }
+
+    @Override
+    public Map<String, String> getParams() {
+        return params;
+    }
+
 }

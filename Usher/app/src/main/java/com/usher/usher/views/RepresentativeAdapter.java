@@ -2,6 +2,7 @@ package com.usher.usher.views;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
     public void onBindViewHolder(@NonNull RepresentativeViewHolder holder, int position) {
         //Llenado de datos
         holder.vName.setText(listRepresentative.get(position).getName());
+        Log.i("cualquien cosa", "cualquien cosa");
+
         holder.vInformation.setText(listRepresentative.get(position).getTextInformation());
         //aca puse la misma imagen porque deberiamso armar la logica de todo el grafico en un futuro cercanisimo
 

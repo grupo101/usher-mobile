@@ -1,5 +1,7 @@
 package com.usher.usher.presenters;
 
+import android.util.Log;
+
 import com.usher.usher.interactors.RepresentativeInteractorImpl;
 import com.usher.usher.interfaces.RepresentativeInteractor;
 import com.usher.usher.interfaces.RepresentativePresenter;
@@ -42,7 +44,7 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
             //Codigo de carga de datos en la lista
             listRepresentative = new ArrayList<>();
 
-            for (int i = 0; i < response.length() - 1; i++) {
+            for (int i = 0; i < response.length() - 2; i++) {
                 block = response.getJSONObject(Integer.toString(i)).getString("block");
                 name = response.getJSONObject(Integer.toString(i)).getString("member_name");
                 surname = response.getJSONObject(Integer.toString(i)).getString("member_surname");
