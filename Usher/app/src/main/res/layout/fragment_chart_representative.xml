@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".views.ChartFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vRepresentativeRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/messaje_test"
-        android:gravity="center"
-        android:text="HOLA MUNDO" />
+        android:scrollbars="vertical"
+        android:layout_margin="10dp" />
+
 </RelativeLayout>

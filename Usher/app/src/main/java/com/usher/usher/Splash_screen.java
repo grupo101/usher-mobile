@@ -1,14 +1,14 @@
 package com.usher.usher;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.usher.usher.views.LoginActivity;
 
-public class Splash_screen extends Activity {
+public class Splash_screen extends AppCompatActivity {
 
     private final int DARATION_SPLASH = 3000;
     @Override

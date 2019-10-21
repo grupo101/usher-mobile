@@ -38,7 +38,6 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         mLineChart = view.findViewById(R.id.barChart);
-        mRecyceViewPieChart = view.findViewById(R.id.pieChart);
         sessionStatistics = (SessionStatistics) getActivity();
 
         presenter = new ChartFragmentPresenterImpl(this);

@@ -34,7 +34,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:contentDescription="@string/b_logout"
-        android:src="@drawable/logo" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/btn_sess"

@@ -40,9 +40,7 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
     @Override
     public void getChart(String method, String username, String session, SessionStatistics sessionStatistics) {
         if(method.equals("bars")) {
-
-            interactor.getSessionData(username,session, (ChartFragment) view, sessionStatistics);
-
+            interactor.getSessionData(username,session, sessionStatistics);
         }else if(method.equals("pie")) {
 
         //ACA SE CARGARIA EL RECYCLERVIEW
