@@ -20,8 +20,8 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
     private RepresentativeView view;
     private RepresentativeInteractor interactor;
     private ArrayList<RepresentativeVO> listRepresentative;
-    private String block, name, surname;
-    private int presences, total;
+    private String photo, name, surname, block;
+    private Integer presences, total;
 
 
     public RepresentativePresenterImpl(RepresentativeFragment view) {
@@ -45,12 +45,17 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
             listRepresentative = new ArrayList<>();
 
             for (int i = 0; i < response.length() - 2; i++) {
-                block = response.getJSONObject(Integer.toString(i)).getString("block");
+                photo = response.getJSONObject(Integer.toString(i)).getString("block");
                 name = response.getJSONObject(Integer.toString(i)).getString("member_name");
                 surname = response.getJSONObject(Integer.toString(i)).getString("member_surname");
+                block = response.getJSONObject(Integer.toString(i)).getString("block");
                 presences = response.getJSONObject(Integer.toString(i)).getInt("presences");
                 total = response.getJSONObject(Integer.toString(i)).getInt("total");
-                listRepresentative.add( new RepresentativeVO(name + " " + surname, block, Float.toString(total/presences)));
+                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
+                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
+                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
+                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
+                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
             }
             view.showRepresentativeView(listRepresentative);
         }

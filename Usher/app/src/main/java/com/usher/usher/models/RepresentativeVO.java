@@ -1,40 +1,48 @@
 package com.usher.usher.models;
 
-import android.media.Image;
-
 public class RepresentativeVO {
 
-    private String name;
-    private String textInformation;
-    private String graphicPresentism;
+    private String photo;
+    private String nameAndSurname;
+    private String block;
+    private Float presentism;
 
-    public RepresentativeVO(String name, String textInformation, String graphicPresentism) {
-        this.name = name;
-        this.textInformation = textInformation;
-        this.graphicPresentism = graphicPresentism;
+    public RepresentativeVO(String photo, String nameAndSurname, String block, Integer presence, Integer total) {
+        this.photo = photo;
+        this.nameAndSurname = nameAndSurname;
+        this.block = block;
+        this.presentism = total != 0 ? (float) presence / (float) total : (float) 0;
     }
 
-    public String getName() {
-        return name;
+    public String getNameAndSurname() {
+        return nameAndSurname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameAndSurname(String nameAndSurname) {
+        this.nameAndSurname = nameAndSurname;
     }
 
-    public String getTextInformation() {
-        return textInformation;
+    public String getBlock() {
+        return block;
     }
 
-    public void setTextInformation(String textInformation) {
-        this.textInformation = textInformation;
+    public void setBlock(String block) {
+        this.block = block;
     }
 
-    public String getGraphicPresentism() {
-        return graphicPresentism;
+    public Float getPresentism() {
+        return presentism;
     }
 
-    public void setGraphicPresentism(String graphicPresentism) {
-        this.graphicPresentism = graphicPresentism;
+    public void setPresentism(Float presentism) {
+        this.presentism = presentism;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

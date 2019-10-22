@@ -1,5 +1,6 @@
 package com.usher.usher.views;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class RepresentativeFragment extends Fragment implements RepresentativeView {
 
 
-    public RepresentativeFragment() {
+    public RepresentativeFragment( ) {
     }
 
     //Comienzo mi RecyclerView
@@ -52,7 +53,7 @@ public class RepresentativeFragment extends Fragment implements RepresentativeVi
     public void showRepresentativeView(ArrayList<RepresentativeVO> listRepresentative) {
         //Union entre los datos del interactor cleneados por el presenter en la view
         this.listRepresentative = listRepresentative;
-        RepresentativeAdapter adapter = new RepresentativeAdapter(listRepresentative);
+        RepresentativeAdapter adapter = new RepresentativeAdapter(listRepresentative, sessionStatistics);
         recyclerRepresentative.setAdapter(adapter);
     }
 
