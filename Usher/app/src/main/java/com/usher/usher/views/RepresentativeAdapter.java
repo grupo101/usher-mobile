@@ -90,24 +90,6 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
 
         Legend legend = holder.aPresentismGraph.getLegend();
         legend.setEnabled(false);
-        //holder.aPresentismGraph.setHoleRadius(50000f);
-        //holder.aPresentismGraph.setTransparentCircleRadius(1f);
-        /*
-
-        holder.aPresentismGraph.setEntryLabelTextSize(0);
-        holder.aPresentismGraph.getData().setDrawValues(false);
-        holder.aPresentismGraph.setDrawMarkers(false);
-        holder.aPresentismGraph.setDrawEntryLabels(false);
-
-        holder.aPresentismGraph.layout(100,100,-100,-50);
-
-
-
-        holder.aPresentismGraph.getCircleBox().set(100,100,-100,-100);
-        float radium = holder.aPresentismGraph.getRadius();
-        MPPointF center = holder.aPresentismGraph.getCenterCircleBox();
-        int i = 1;*/
-        //holder.aPresentismGraph.invalidate();
 
         /**Glide.with(holder.aPhotoRepresentative)
                 .load(listRepresentative.get(position).getPresentism())
