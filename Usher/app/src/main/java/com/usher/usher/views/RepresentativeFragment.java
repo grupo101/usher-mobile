@@ -55,6 +55,7 @@ public class RepresentativeFragment extends Fragment implements RepresentativeVi
         this.listRepresentative = listRepresentative;
         RepresentativeAdapter adapter = new RepresentativeAdapter(listRepresentative, sessionStatistics);
         recyclerRepresentative.setAdapter(adapter);
+        recyclerRepresentative.invalidate();
     }
 
     @Override

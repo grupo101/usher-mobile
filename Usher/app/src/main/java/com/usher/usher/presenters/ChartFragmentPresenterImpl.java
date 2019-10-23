@@ -64,7 +64,7 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
             lineDataSet.setColor(ColorTemplate.getHoloBlue());
             lineDataSet.setValueTextColor(ColorTemplate.getHoloBlue());
             lineDataSet.setLineWidth(1.5f);
-            lineDataSet.setDrawCircles(false);
+            lineDataSet.setDrawCircles(true);
             lineDataSet.setDrawValues(false);
             lineDataSet.setFillAlpha(65);
             lineDataSet.setFillColor(ColorTemplate.getHoloBlue());

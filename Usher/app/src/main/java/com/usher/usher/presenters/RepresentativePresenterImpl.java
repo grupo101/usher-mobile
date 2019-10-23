@@ -1,7 +1,11 @@
 package com.usher.usher.presenters;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieEntry;
 import com.usher.usher.interactors.RepresentativeInteractorImpl;
 import com.usher.usher.interfaces.RepresentativeInteractor;
 import com.usher.usher.interfaces.RepresentativePresenter;
@@ -14,6 +18,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class RepresentativePresenterImpl implements RepresentativePresenter {
 
