@@ -3,13 +3,11 @@ package com.usher.usher.views;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.graphics.drawable.Drawable;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -17,8 +15,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.MPPointF;
+import com.squareup.picasso.Picasso;
 import com.usher.usher.R;
 import com.usher.usher.models.RepresentativeVO;
 
@@ -53,10 +50,10 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
         holder.aNameAndSurnameRepresentative.setText(listRepresentative.get(position).getNameAndSurname());
         holder.aBlockRepresentative.setText(listRepresentative.get(position).getBlock());
         if (listRepresentative.get(position).getPresentism() > 0.5) {
-            holder.aPresenceSituationRepresentative.setText( "PRESENTE en un " + listRepresentative.get(position).getPresentism()*100 + "%");
+            holder.aPresenceSituationRepresentative.setText( "PRESENTE en un " + String.format("%.1f", listRepresentative.get(position).getPresentism()*100) + "%");
             holder.aPresenceSituationRepresentative.setTextColor(context.getResources().getColor(R.color.colorAccent));
         } else {
-            holder.aPresenceSituationRepresentative.setText( "AUSENTE EN UN " + listRepresentative.get(position).getAusentism()*100 + "%");
+            holder.aPresenceSituationRepresentative.setText( "AUSENTE EN UN " + String.format("%.1f", listRepresentative.get(position).getAusentism()*100) + "%");
             holder.aPresenceSituationRepresentative.setTextColor(context.getResources().getColor(R.color.colorPrimary));
         }
 
@@ -69,12 +66,10 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
         pieEntry.add(new PieEntry(listRepresentative.get(position).getAusentism(), "A"));
 
         PieDataSet pieDataSet = new PieDataSet(pieEntry, ".");
-
         pieDataSet.setValueTextSize(10);
         pieDataSet.setDrawValues(true);
         pieDataSet.setDrawIcons(false);
         pieDataSet.setHighlightEnabled(false);
-
         pieDataSet.setColors(colors);
 
         PieData pieData = new PieData(pieDataSet);
@@ -87,9 +82,13 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
         holder.aPresentismGraph.setDrawHoleEnabled(false);
         holder.aPresentismGraph.setDrawSliceText(false);
 
-
         Legend legend = holder.aPresentismGraph.getLegend();
         legend.setEnabled(false);
+
+        //Cuando tengamos url en php, reemplazar lineas
+        //Picasso.with(context).load(listRepresentative.get(position).getPhoto()).into(holder.aPhotoRepresentative);
+        String url = "https://blobwebbrazil.blob.core.windows.net/diputados/barbieri.png";
+        Picasso.with(context).load(url).into(holder.aPhotoRepresentative);
 
         /**Glide.with(holder.aPhotoRepresentative)
                 .load(listRepresentative.get(position).getPresentism())

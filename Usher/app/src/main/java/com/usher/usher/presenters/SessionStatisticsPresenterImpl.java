@@ -32,7 +32,7 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
     @Override
     public void listSessions (JSONObject jsonResponse) throws JSONException {
         ArrayList<String> arrayList = new ArrayList<String>();
-        String coment = null;
+        String coment = null, fecha = null;
         int idSession;
         for (int i = jsonResponse.length() - 2; i > -1; i--) {
             coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");

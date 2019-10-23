@@ -3,7 +3,6 @@ package com.usher.usher.views;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.usher.usher.presenters.ChartFragmentPresenterImpl;
 public class ChartFragment extends Fragment implements ChartFragmentView {
 
     private LineChart mLineChart;
-    private RecyclerView mRecyceViewPieChart;
     private ChartFragmantPresenter presenter;
     private SessionStatisticsActivity sessionStatistics;
 
@@ -42,10 +40,9 @@ public class ChartFragment extends Fragment implements ChartFragmentView {
 
         presenter = new ChartFragmentPresenterImpl(this);
 
-        presenter.getChart(getArguments().getString("method"),
-                getArguments().getString("username"),
-                getArguments().getString("session"),
-                sessionStatistics);
+        presenter.getChart(getArguments().getString("username"),
+                  getArguments().getString("session"),
+                  sessionStatistics);
 
         return view;
     }

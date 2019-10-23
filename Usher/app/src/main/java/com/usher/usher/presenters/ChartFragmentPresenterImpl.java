@@ -2,6 +2,7 @@ package com.usher.usher.presenters;
 
 import android.graphics.Color;
 
+import com.usher.usher.R;
 import com.usher.usher.interactors.ChartFragmentInteractorImpl;
 import com.usher.usher.interfaces.ChartFragmantPresenter;
 import com.usher.usher.interfaces.ChartFragmentInteractor;
@@ -26,7 +27,7 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
 
     private ChartFragmentView view;
     private ChartFragmentInteractor interactor;
-    //private LineChart mLineChart;
+    SessionStatisticsActivity context;
 
     public ChartFragmentPresenterImpl(ChartFragment view) {
         this.view = view;
@@ -36,14 +37,9 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
 
 
     @Override
-    public void getChart(String method, String username, String session, SessionStatisticsActivity sessionStatistics) {
-        if(method.equals("bars")) {
-            interactor.getSessionData(username,session, sessionStatistics);
-        }else if(method.equals("pie")) {
-
-        //ACA SE CARGARIA EL RECYCLERVIEW
-
-        }
+    public void getChart(String username, String session, SessionStatisticsActivity sessionStatistics) {
+        this.context = sessionStatistics;
+        interactor.getSessionData(username,session, sessionStatistics);
     }
 
 
@@ -59,15 +55,14 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
                 entries.add(new BarEntry(minutes, presents));
             }
             LineDataSet lineDataSet = new LineDataSet(entries, "Representación cada 5 minutos");
-            lineDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
             lineDataSet.setValueTextSize(15f);
-            lineDataSet.setColor(ColorTemplate.getHoloBlue());
+            lineDataSet.setColor(context.getResources().getColor(R.color.colorAccent));
             lineDataSet.setValueTextColor(ColorTemplate.getHoloBlue());
             lineDataSet.setLineWidth(1.5f);
             lineDataSet.setDrawCircles(true);
+            lineDataSet.setCircleColor(context.getResources().getColor(R.color.colorAccent));
             lineDataSet.setDrawValues(false);
             lineDataSet.setFillAlpha(65);
-            lineDataSet.setFillColor(ColorTemplate.getHoloBlue());
             lineDataSet.setHighLightColor(Color.rgb(244, 117, 117));
             lineDataSet.setDrawCircleHole(false);
 

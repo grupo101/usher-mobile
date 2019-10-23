@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public interface ChartFragmantPresenter {
 
-    void getChart(String method, String username, String session, SessionStatisticsActivity sessionStatistics);
+    void getChart(String username, String session, SessionStatisticsActivity sessionStatistics);
 
     void showErrorPresenter(JSONException e);
 

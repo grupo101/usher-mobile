@@ -17,7 +17,7 @@ import com.usher.usher.presenters.MainMenuActivityPresenterImpl;
 public class MainMenuActivity extends AppCompatActivity implements MainMenuActivityView {
 
 
-    private TextView tvUser, tvName, tvSurname, tvPassword;
+    private TextView tvName;
     private Button btn_sesion, btn_out, btn_hist, btn_edit;
     private ProgressBar pr_progressMainMenu;
     private MainMenuActivityPresenter presenter;
@@ -113,7 +113,6 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     @Override
     public void accessSuccessfullView() {
         Intent sessionStatistics = new Intent(MainMenuActivity.this, SessionStatisticsActivity.class);
-        sessionStatistics.putExtra("method", "bars");
         sessionStatistics.putExtra("username", username);
         startActivity(sessionStatistics);
     }
