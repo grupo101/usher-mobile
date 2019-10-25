@@ -85,10 +85,10 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
         Legend legend = holder.aPresentismGraph.getLegend();
         legend.setEnabled(false);
 
-        //Cuando tengamos url en php, reemplazar lineas
-        //Picasso.with(context).load(listRepresentative.get(position).getPhoto()).into(holder.aPhotoRepresentative);
-        String url = "https://blobwebbrazil.blob.core.windows.net/diputados/barbieri.png";
-        Picasso.with(context).load(url).into(holder.aPhotoRepresentative);
+        Picasso.with(context).load(listRepresentative.get(position).getPhoto())
+                .placeholder(R.drawable.default_member)
+                .error(R.drawable.default_member)
+                .into(holder.aPhotoRepresentative);
 
         /**Glide.with(holder.aPhotoRepresentative)
                 .load(listRepresentative.get(position).getPresentism())

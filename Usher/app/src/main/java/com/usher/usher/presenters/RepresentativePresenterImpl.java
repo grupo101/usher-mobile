@@ -43,16 +43,12 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
             listRepresentative = new ArrayList<>();
 
             for (int i = 0; i < response.length() - 2; i++) {
-                photo = response.getJSONObject(Integer.toString(i)).getString("block");
+                photo = response.getJSONObject(Integer.toString(i)).getString("photo");
                 name = response.getJSONObject(Integer.toString(i)).getString("member_name");
                 surname = response.getJSONObject(Integer.toString(i)).getString("member_surname");
                 block = response.getJSONObject(Integer.toString(i)).getString("block");
                 presences = response.getJSONObject(Integer.toString(i)).getInt("presences");
                 total = response.getJSONObject(Integer.toString(i)).getInt("total");
-                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
-                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
-                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
-                listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
                 listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
             }
             view.showRepresentativeView(listRepresentative);
