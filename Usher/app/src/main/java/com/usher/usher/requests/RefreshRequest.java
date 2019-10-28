@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class RefreshRequest extends StringRequest {
 
-    //private static final String LOGIN_REQUEST_URL="http://192.168.0.6:8080/Refresh.php";
-    private static final String LOGIN_REQUEST_URL="https://usher.sytes.net/usher-api/refresh?token=48370255gBrgdlpl050588";
-    //private static final String LOGIN_REQUEST_URL="https://usher.sytes.net/usher-bck/login.php";
+    private static final String REFRESH_REQUEST_URL="https://usher.sytes.net/usher-api/check_status?token=48370255gBrgdlpl050588";
+    //private static final String LOGIN_REQUEST_URL="https://usher.sytes.net/usher-api/refresh?token=48370255gBrgdlpl050588";
     private Map<String,String> params;
 
     public RefreshRequest(Response.Listener<String> listener ){
 
-        super(Request.Method.POST,LOGIN_REQUEST_URL,listener,null);
+        super(Request.Method.POST,REFRESH_REQUEST_URL,listener,null);
         params= new HashMap<>();
+        params.put("server","SVR1");
     }
 
     @Override
