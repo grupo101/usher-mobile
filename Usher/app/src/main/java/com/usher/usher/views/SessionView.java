@@ -85,7 +85,7 @@ public class SessionView extends View {
                                 int i, presente = 0, ausente = 0;
                                 for (i = 0; i < linea.length(); i++) {
 
-                                    if (linea.charAt(i) == '0')
+                                    if (linea.charAt(i) == '1')
                                         presente++;
                                     else ausente++;
 
@@ -145,7 +145,7 @@ public class SessionView extends View {
         int i;
         if (isRender) {
             for (i = 0; i < taam; i++) {
-                camara.get(i).setColor(linea.charAt(i) == '0' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
+                camara.get(i).setColor(linea.charAt(i) == '1' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
 
                 if ((pos + ancho / 10) < ancho) {
                     pos = pos + ancho / 11;

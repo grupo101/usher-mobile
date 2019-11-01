@@ -22,9 +22,9 @@ public class MainMenuActivityPresenterImpl implements MainMenuActivityPresenter 
     }
 
     @Override
-    public void checkSesion() {
+    public void checkActiveSesion(String username) {
         view.showProgress(true);
-        interactor.checkSesionStatus();
+        interactor.checkSesionStatus(username,(MainMenuActivity) view);
     }
 
     @Override

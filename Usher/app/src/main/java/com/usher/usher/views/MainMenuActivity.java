@@ -49,7 +49,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
             @Override
             public void onClick(View view) {
-                presenter.checkSesion();
+                presenter.checkActiveSesion(intent.getStringExtra("username"));
             }
         });
 
