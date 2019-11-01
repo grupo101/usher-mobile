@@ -5,7 +5,7 @@ import com.usher.usher.interactors.SessionStatisticsInteractorImpl;
 import com.usher.usher.interfaces.SessionStatisticsInteractor;
 import com.usher.usher.interfaces.SessionStatisticsPresenter;
 import com.usher.usher.interfaces.SessionStatisticsView;
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,13 +26,13 @@ public class SessionStatisticsPresenterImpl implements SessionStatisticsPresente
 
     @Override
     public void fillSpinner(String username) {
-        interactor.getSessionList(username, (SessionStatistics) view);
+        interactor.getSessionList(username, (SessionStatisticsActivity) view);
     }
 
     @Override
     public void listSessions (JSONObject jsonResponse) throws JSONException {
         ArrayList<String> arrayList = new ArrayList<String>();
-        String coment = null;
+        String coment = null, fecha = null;
         int idSession;
         for (int i = jsonResponse.length() - 2; i > -1; i--) {
             coment = jsonResponse.getJSONObject(Integer.toString(i)).getString("comment");

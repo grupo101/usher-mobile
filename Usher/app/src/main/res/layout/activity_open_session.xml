@@ -13,11 +13,11 @@
 
     <Button
         android:id="@+id/btn_Quorum"
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/b_quorum"
-        android:textColor="#000000"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp" />
 
     <ProgressBar
@@ -51,19 +51,20 @@
             android:layout_toStartOf="@+id/btn_pres"
             android:layout_toLeftOf="@+id/btn_pres"
             android:text="@string/tv_present"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp" />
 
         <Button
             android:id="@+id/btn_pres"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="50dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/btn_green"
             android:text=""
-            android:textColor="#000000"
+            android:textColor="@color/colorPrimaryLight"
             android:textSize="25sp" />
     </RelativeLayout>
 
@@ -85,19 +86,20 @@
             android:layout_toStartOf="@+id/btn_aus"
             android:layout_toLeftOf="@+id/btn_aus"
             android:text="@string/tv_missing"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp" />
 
         <Button
             android:id="@+id/btn_aus"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="50dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/btn_red"
             android:text=""
-            android:textColor="#000000"
+            android:textColor="@color/colorPrimaryLight"
             android:textSize="25sp" />
     </RelativeLayout>
 

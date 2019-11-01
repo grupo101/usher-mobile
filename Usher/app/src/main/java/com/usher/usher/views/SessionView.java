@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +15,6 @@ import android.widget.Button;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.usher.usher.OpenSession;
 import com.usher.usher.R;
 import com.usher.usher.requests.RefreshRequest;
 
@@ -54,9 +56,9 @@ public class SessionView extends View {
 
     private void init(@Nullable AttributeSet set, final Context context) {
         camara = new ArrayList<>();
-        btn_Aus = ((OpenSession) context).findViewById(R.id.btn_aus);
-        btn_Pres = ((OpenSession) context).findViewById(R.id.btn_pres);
-        btn_Quorum = ((OpenSession) context).findViewById(R.id.btn_Quorum);
+        btn_Aus = ((OpenSessionActivity) context).findViewById(R.id.btn_aus);
+        btn_Pres = ((OpenSessionActivity) context).findViewById(R.id.btn_pres);
+        btn_Quorum = ((OpenSessionActivity) context).findViewById(R.id.btn_Quorum);
         numberSeats = new Paint();
         numberSeats.setColor(Color.BLACK);
         numberSeats.setTextSize(20);
@@ -69,6 +71,7 @@ public class SessionView extends View {
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onResponse(String response) {
 
@@ -95,10 +98,11 @@ public class SessionView extends View {
                                 isCamaraNotSet = false;
                                 if (presente > ausente) {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                        btn_Quorum.setBackground(getResources().getDrawable(R.drawable.btn_green));
+
                                 } else {
                                     if (btn_Quorum != null)
-                                        btn_Quorum.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        btn_Quorum.setBackground(getResources().getDrawable(R.drawable.btn_red));
                                 }
                                 if (btn_Pres != null) {
                                     btn_Pres.setText(String.valueOf(presente));

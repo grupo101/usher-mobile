@@ -1,7 +1,7 @@
 package com.usher.usher.interfaces;
 
-import com.usher.usher.views.SessionStatistics;
+import com.usher.usher.views.SessionStatisticsActivity;
 
 public interface SessionStatisticsInteractor {
-    void getSessionList(String username, SessionStatistics sessionStatistics);
+    void getSessionList(String username, SessionStatisticsActivity sessionStatistics);
 }

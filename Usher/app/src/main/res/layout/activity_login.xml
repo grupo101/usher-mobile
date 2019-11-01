@@ -49,7 +49,7 @@
         android:layout_gravity="center"
         android:background="@drawable/btn_green"
         android:text="@string/b_login"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorPrimaryLight"
         android:textSize="20sp"/>
 
     <ProgressBar

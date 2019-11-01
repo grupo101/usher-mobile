@@ -1,4 +1,4 @@
-package com.usher.usher;
+package com.usher.usher.views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.usher.usher.R;
 import com.usher.usher.views.SessionView;
 
 
 
-public class OpenSession extends AppCompatActivity {
+public class OpenSessionActivity extends AppCompatActivity {
 
     public TextView tvPres;
     private TextView tvAus;

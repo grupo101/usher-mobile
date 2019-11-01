@@ -1,8 +1,8 @@
 package com.usher.usher.views;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,17 +10,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.usher.usher.R;
 import com.usher.usher.interfaces.RegisterUserActivityPresenter;
 import com.usher.usher.interfaces.RegisterUserActivityView;
 import com.usher.usher.presenters.RegisterUserActivityPresenterImpl;
-import com.usher.usher.requests.RegisterUserRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class RegisterUserActivity extends AppCompatActivity
         implements RegisterUserActivityView {
@@ -75,7 +68,7 @@ public class RegisterUserActivity extends AppCompatActivity
 
     @Override
     public void onRegisterFailed() {
-        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUserActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterUserActivity.this);
         builder.setMessage("Error en el registro. Usuario existente").setNegativeButton("Retry", null).create().show();
     }
 

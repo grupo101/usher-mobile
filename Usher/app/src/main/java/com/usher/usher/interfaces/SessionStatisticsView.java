@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public interface SessionStatisticsView {
 
-    void showProgress(boolean option);
-
     void loadList(ArrayList<String> arrayList);
 
     void loadTabLayoutFragments();

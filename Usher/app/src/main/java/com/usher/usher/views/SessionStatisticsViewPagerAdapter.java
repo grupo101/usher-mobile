@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class SessionStatisticsViewPagerAdapter extends FragmentPagerAdapter {
 
 
     ArrayList<Fragment> fragments = new ArrayList<>();
@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.tabTitles.add(tabTitles);
     }
 
-    public ViewPagerAdapter(FragmentManager fn){
+    public SessionStatisticsViewPagerAdapter(FragmentManager fn){
         super(fn);
 
     }
