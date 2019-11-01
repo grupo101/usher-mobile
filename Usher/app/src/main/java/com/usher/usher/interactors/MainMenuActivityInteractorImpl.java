@@ -26,12 +26,6 @@ public class MainMenuActivityInteractorImpl implements MainMenuActivityInteracto
 
     @Override
     public void checkSesionStatus(String username, MainMenuActivity mainMenuActivity) {
-        //aca va el codigo para pegarle a la sesion para saber si esta en START
-        if(true)
-            presenter.onSesion(true);
-        else
-            presenter.offSesion(false);
-
         responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
