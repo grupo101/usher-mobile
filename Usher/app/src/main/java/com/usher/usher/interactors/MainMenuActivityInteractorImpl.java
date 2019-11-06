@@ -36,6 +36,8 @@ public class MainMenuActivityInteractorImpl implements MainMenuActivityInteracto
                         presenter.onSesion(true);
                     else
                         presenter.offSesion(false);
+                    //BORRAR POST EXPO
+                        presenter.onSesion(true);
                 } catch (JSONException e) {
                     presenter.showErrorPresenter(e);
                 }

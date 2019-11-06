@@ -64,7 +64,8 @@ public class SessionView extends View {
         numberSeats.setTextSize(20);
         marginLines = new Paint();
         marginLines.setColor(Color.BLACK);
-
+        final RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+        RefreshRequest refreshRequest;
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -121,7 +122,6 @@ public class SessionView extends View {
                 };
 
                 RefreshRequest refreshRequest = new RefreshRequest(responseListener);
-                RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
                 queue.add(refreshRequest);
 
             }
