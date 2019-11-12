@@ -116,7 +116,7 @@ public class SessionView extends View {
                             } else
                                 setRender(false);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
                         }
                     }
                 };
