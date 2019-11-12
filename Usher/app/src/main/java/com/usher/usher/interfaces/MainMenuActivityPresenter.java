@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public interface MainMenuActivityPresenter {
 
-    void checkSesion();
+    void checkActiveSesion(String username);
 
     void checkAccess(String username);
 

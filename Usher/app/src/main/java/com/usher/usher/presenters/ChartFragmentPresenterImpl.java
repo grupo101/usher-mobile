@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
@@ -54,6 +56,13 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
                 minutes = response.getJSONObject(Integer.toString(i)).getInt("minutes");
                 entries.add(new BarEntry(minutes, presents));
             }
+            Collections.sort(entries, new Comparator<Entry>() {
+                @Override
+                public int compare(Entry entry1, Entry entry2) {
+                    return Integer.valueOf((int) entry1.getX()).compareTo((int) entry2.getX());
+                }
+            });
+
             LineDataSet lineDataSet = new LineDataSet(entries, "Representación cada 5 minutos");
             lineDataSet.setValueTextSize(15f);
             lineDataSet.setColor(context.getResources().getColor(R.color.colorAccent));

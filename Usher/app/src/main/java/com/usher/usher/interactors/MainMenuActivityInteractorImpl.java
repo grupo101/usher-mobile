@@ -6,6 +6,7 @@ import com.android.volley.toolbox.Volley;
 import com.usher.usher.interfaces.MainMenuActivityInteractor;
 import com.usher.usher.interfaces.MainMenuActivityPresenter;
 import com.usher.usher.requests.LoginActivityRequest;
+import com.usher.usher.requests.SessionListRequest;
 import com.usher.usher.requests.StatisticsAccessRequest;
 import com.usher.usher.views.MainMenuActivity;
 
@@ -24,12 +25,25 @@ public class MainMenuActivityInteractorImpl implements MainMenuActivityInteracto
 
 
     @Override
-    public void checkSesionStatus() {
-        //aca va el codigo para pegarle a la sesion para saber si esta en START
-        if(true)
-            presenter.onSesion(true);
-        else
-            presenter.offSesion(false);
+    public void checkSesionStatus(String username, MainMenuActivity mainMenuActivity) {
+        responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean succes = jsonResponse.getBoolean("succes");
+                    if (succes)
+                        presenter.onSesion(true);
+                    else
+                        presenter.offSesion(false);
+                } catch (JSONException e) {
+                    presenter.showErrorPresenter(e);
+                }
+            }
+        };
+        SessionListRequest activeSessionRequest = new SessionListRequest(true, username, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(mainMenuActivity);
+        queue.add(activeSessionRequest);
     }
 
     @Override
