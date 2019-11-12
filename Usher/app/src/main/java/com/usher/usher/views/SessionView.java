@@ -144,25 +144,40 @@ public class SessionView extends View {
         pos = 0;
         int i;
         if (isRender) {
-            for (i = 0; i < taam; i++) {
-                camara.get(i).setColor(linea.charAt(i) == '1' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
+            if (taam != 9){
+                for (i = 0; i < taam; i++) {
+                    camara.get(i).setColor(linea.charAt(i) == '1' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
 
-                if ((pos + ancho / 10) < ancho) {
-                    pos = pos + ancho / 11;
-                } else {
-                    pos = ancho / 11;
-                    desply = desply + alto / 11;
+                    if ((pos + ancho / 10) < ancho) {
+                        pos = pos + ancho / 11;
+                    } else {
+                        pos = ancho / 11;
+                        desply = desply + alto / 11;
+                    }
+
+                    canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, camara.get(i));
+
+                    String ubicacion = Integer.toString(i + 1);
+                    if (i < 9)
+                        canvas.drawText(ubicacion, pos - 5, (alto / 11) + desply + 10, numberSeats);
+                    else if (i < 99)
+                        canvas.drawText(ubicacion, pos - 13, (alto / 11) + desply + 10, numberSeats);
+                    else
+                        canvas.drawText(ubicacion, pos - 23, (alto / 11) + desply + 10, numberSeats);
                 }
-
-                canvas.drawCircle(pos, alto / 11 + desply, ancho / 30, camara.get(i));
-
-                String ubicacion = Integer.toString(i + 1);
-                if (i < 9)
-                    canvas.drawText(ubicacion, pos - 5, (alto / 11) + desply + 10, numberSeats);
-                else if (i < 99)
-                    canvas.drawText(ubicacion, pos - 13, (alto / 11) + desply + 10, numberSeats);
-                else
-                    canvas.drawText(ubicacion, pos - 23, (alto / 11) + desply + 10, numberSeats);
+            }else {
+                numberSeats.setTextSize(50);
+                for (i = 0; i < taam; i++) {
+                    camara.get(i).setColor(linea.charAt(i) == '1' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
+                    if ((pos + ancho / 4) < ancho) {
+                        pos = pos + ancho / 4;
+                    } else {
+                        pos = ancho / 4;
+                        desply = desply + alto / 4;
+                    }
+                    canvas.drawCircle(pos, alto / 4 + desply, ancho / 10, camara.get(i));
+                    canvas.drawText(Integer.toString(i + 1), pos - 15, (alto / 4) + desply + 15, numberSeats);
+                }
             }
         }
     }
