@@ -24,6 +24,11 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     private String username, password, name, surname;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
 
+    //Status
+    boolean btnSesionClickedOn = true;
+    boolean btnHistClickedOn = true;
+    boolean btnEditClickedOn = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,9 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
         name = intent.getStringExtra("name");
         surname = intent.getStringExtra("surname");
         password = intent.getStringExtra("password");
+
+
+
         //Pasamos metodos del View al Presenter
         presenter = new MainMenuActivityPresenterImpl(this);
 
@@ -49,26 +57,37 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
 
             @Override
             public void onClick(View view) {
-                presenter.checkActiveSesion(intent.getStringExtra("username"));
+                if (btnSesionClickedOn){
+                    presenter.checkActiveSesion(intent.getStringExtra("username"));
+                    btnSesionClickedOn = false;
+                }
+
             }
         });
 
         btn_hist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.checkAccess(intent.getStringExtra("username"));
+                if (btnHistClickedOn){
+                    presenter.checkAccess(intent.getStringExtra("username"));
+                    btnHistClickedOn = false;
+                }
+
             }
         });
 
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentEditProfile = new Intent(MainMenuActivity.this, EditActivity.class);
-                intentEditProfile.putExtra("name", name);
-                intentEditProfile.putExtra("surname", surname);
-                intentEditProfile.putExtra("username", username);
-                intentEditProfile.putExtra("password", password);
-                MainMenuActivity.this.startActivityForResult(intentEditProfile, EDIT_ACTIVITY_REQUEST_CODE);
+                if (btnEditClickedOn){
+                    Intent intentEditProfile = new Intent(MainMenuActivity.this, EditActivity.class);
+                    intentEditProfile.putExtra("name", name);
+                    intentEditProfile.putExtra("surname", surname);
+                    intentEditProfile.putExtra("username", username);
+                    intentEditProfile.putExtra("password", password);
+                    MainMenuActivity.this.startActivityForResult(intentEditProfile, EDIT_ACTIVITY_REQUEST_CODE);
+                    btnEditClickedOn = false;
+                }
             }
         });
         btn_out.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +110,7 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
                 password = data.getStringExtra("password");
                 presenter.setName(name, surname);
             }
+        btnEditClickedOn = true;
         }
     }
 
@@ -102,11 +122,13 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     @Override
     public void onSesion(boolean status) {
         Intent openSession = new Intent(MainMenuActivity.this, OpenSessionActivity.class);
+        btnSesionClickedOn = true;
         MainMenuActivity.this.startActivity(openSession);
     }
 
     @Override
     public void offSesion(boolean status) {
+        btnSesionClickedOn = true;
         Toast.makeText(getApplicationContext(), "Sesión innactiva. Intente en otro momento", Toast.LENGTH_LONG).show();
     }
 
@@ -114,16 +136,21 @@ public class MainMenuActivity extends AppCompatActivity implements MainMenuActiv
     public void accessSuccessfullView() {
         Intent sessionStatistics = new Intent(MainMenuActivity.this, SessionStatisticsActivity.class);
         sessionStatistics.putExtra("username", username);
+        btnHistClickedOn = true;
         startActivity(sessionStatistics);
     }
 
     @Override
     public void accessFailedView() {
+        btnHistClickedOn = true;
         Toast.makeText(getApplicationContext(), "No tiene permiso para acceder", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showError() {
+        btnSesionClickedOn = true;
+        btnHistClickedOn = true;
+        btnEditClickedOn = true;
         Toast.makeText(getApplicationContext(), "Error en la conexion", Toast.LENGTH_LONG).show();
     }
 
