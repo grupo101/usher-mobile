@@ -12,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RepresentativePresenterImpl implements RepresentativePresenter {
 
@@ -51,6 +53,13 @@ public class RepresentativePresenterImpl implements RepresentativePresenter {
                 total = response.getJSONObject(Integer.toString(i)).getInt("total");
                 listRepresentative.add( new RepresentativeVO( photo, name + " " + surname, block, presences, total));
             }
+
+            Collections.sort(listRepresentative, new Comparator<RepresentativeVO>() {
+                @Override
+                public int compare(RepresentativeVO listRepresentative1, RepresentativeVO listRepresentative2) {
+                    return listRepresentative1.getNameAndSurname().compareTo(listRepresentative2.getNameAndSurname());
+                }
+            });
             view.showRepresentativeView(listRepresentative);
         }
     }
