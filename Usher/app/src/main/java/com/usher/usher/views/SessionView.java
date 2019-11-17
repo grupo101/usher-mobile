@@ -66,7 +66,7 @@ public class SessionView extends View {
         marginLines.setColor(Color.BLACK);
         final RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         RefreshRequest refreshRequest;
-        Timer timer = new Timer();
+        final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
 
@@ -83,6 +83,7 @@ public class SessionView extends View {
                             if (succes) {
                                 linea = jsonResponse.getString("status");
                                 taam = linea.length();
+                                taam = 9 ;
                                 int i, presente = 0, ausente = 0;
                                 for (i = 0; i < linea.length(); i++) {
 
@@ -167,16 +168,18 @@ public class SessionView extends View {
                 }
             }else {
                 numberSeats.setTextSize(50);
+
+                desply = alto;
                 for (i = 0; i < taam; i++) {
                     camara.get(i).setColor(linea.charAt(i) == '1' ? getResources().getColor(R.color.colorAccent) : getResources().getColor(R.color.colorPrimary));
                     if ((pos + ancho / 4) < ancho) {
                         pos = pos + ancho / 4;
                     } else {
                         pos = ancho / 4;
-                        desply = desply + alto / 4;
+                        desply = desply - alto / 4;
                     }
-                    canvas.drawCircle(pos, alto / 4 + desply, ancho / 10, camara.get(i));
-                    canvas.drawText(Integer.toString(i + 1), pos - 15, (alto / 4) + desply + 15, numberSeats);
+                    canvas.drawCircle(pos, desply - alto / 4, ancho / 10, camara.get(i));
+                    canvas.drawText(Integer.toString(i + 1), pos - 15,  desply - (alto / 4) + 15, numberSeats);
                 }
             }
         }
