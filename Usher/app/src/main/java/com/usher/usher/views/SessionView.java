@@ -83,7 +83,6 @@ public class SessionView extends View {
                             if (succes) {
                                 linea = jsonResponse.getString("status");
                                 taam = linea.length();
-                                taam = 9 ;
                                 int i, presente = 0, ausente = 0;
                                 for (i = 0; i < linea.length(); i++) {
 
