@@ -36,7 +36,6 @@ public class MainMenuActivityInteractorImpl implements MainMenuActivityInteracto
                         presenter.onSesion(true);
                     else
                         presenter.offSesion(false);
-                    presenter.onSesion(true);
                 } catch (JSONException e) {
                     presenter.showErrorPresenter(e);
                 }

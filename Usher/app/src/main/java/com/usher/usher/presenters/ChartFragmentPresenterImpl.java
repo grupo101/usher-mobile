@@ -50,11 +50,11 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
         if (view != null) {
             List<Entry> entries = new ArrayList<>();
             int presents;
-            int minutes;
+            float minutes;
             for (int i = 0; i < response.length() - 1; i++) {
                 presents = response.getJSONObject(Integer.toString(i)).getInt("presents");
                 minutes = response.getJSONObject(Integer.toString(i)).getInt("minutes");
-                entries.add(new BarEntry(minutes, presents));
+                entries.add(new BarEntry(minutes / 60, presents));
             }
             Collections.sort(entries, new Comparator<Entry>() {
                 @Override
@@ -63,7 +63,7 @@ public class ChartFragmentPresenterImpl implements ChartFragmantPresenter {
                 }
             });
 
-            LineDataSet lineDataSet = new LineDataSet(entries, "Representación cada 5 minutos");
+            LineDataSet lineDataSet = new LineDataSet(entries, "Representación cada 15 segundos");
             lineDataSet.setValueTextSize(15f);
             lineDataSet.setColor(context.getResources().getColor(R.color.colorAccent));
             lineDataSet.setValueTextColor(ColorTemplate.getHoloBlue());
