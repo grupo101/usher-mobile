@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Usher</string>
+    <string name="app_menu">MENU PRINCIPAL</string>
+    <string name="b_session">Mirar Sesion</string>
+    <string name="b_history">Estadisticas</string>
+    <string name="b_editprof">Editar perfil</string>
+    <string name="b_editar">Guardar cambios</string>
+    <string name="b_logout">Salir</string>
+    <string name="et_name">Nombre</string>
+    <string name="et_lastName">Apellido</string>
+    <string name="et_username">Usuario</string>
+    <string name="etPassword">Contraseña</string>
+    <string name="tv_powNeu">Powered by NeuralFix</string>
+    <string name="b_login">ACCEDER</string>
+    <string name="b_signup">REGISTRARSE AHORA</string>
+    <string name="tv_signuptxt">No tenes cuenta?</string>
+    <string name="i_descLogo">Logo</string>
+    <string name="b_updateLine">Informe Bloque</string>
+    <string name="b_updatePie">Informe Diputados</string>
+    <string name="b_quorum">QUORUM</string>
+    <string name="tv_missing">Ausentes:</string>
+    <string name="tv_present">Presentes:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="inicio_de_sesion">INICIO DE SESIÓN</string>
+    <string name="registrar_usuario">REGISTRAR USUARIO</string>
+    <string name="editar_perfil">EDITAR PERFIL</string>
+
 </resources>
