@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -18,6 +17,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.squareup.picasso.Picasso;
 import com.usher.usher.R;
 import com.usher.usher.models.RepresentativeVO;
+import com.usher.usher.resources.CircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +86,7 @@ public class RepresentativeAdapter extends RecyclerView.Adapter<RepresentativeAd
         legend.setEnabled(false);
 
         Picasso.with(context).load(listRepresentative.get(position).getPhoto())
+                .transform(new CircleTransform())
                 .placeholder(R.drawable.default_member)
                 .error(R.drawable.default_member)
                 .into(holder.aPhotoRepresentative);
